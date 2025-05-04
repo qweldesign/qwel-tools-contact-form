@@ -4,10 +4,11 @@
 
 .form {
   @include form();
+  margin-block-end: space("large");
 
   &__table {
     @include table();
-    margin-block-end: space("medium");
+    margin-block-end: space("large");
 
     th {
       width: 12rem;
@@ -15,6 +16,27 @@
   }
 
   &__buttons {
-    @include row(center);
+    text-align: center;
+
+    [type="submit"], [type="button"], [type="reset"] {
+      display: inline-block;
+      width: 14rem;
+      height: 3.5rem;
+      line-height: 3.5rem;
+      margin-inline: auto;
+      @include make-button();
+    }
+
+    [type="submit"] {
+      @include make-button-color-normal("primary");
+    }
+  
+    [type="button"] {
+      @include make-button-color-normal("secondary");
+    }
+  
+    [type="reset"] {
+      @include make-button-color-normal("tertiary");
+    }
   }
 }

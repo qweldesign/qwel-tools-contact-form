@@ -1,51 +1,13 @@
 /**
- * Layout - Header
+ * Header
  */
 
-$header-height:  4.5rem !default;
-
 .header {
-  position: fixed;
-  z-index: 1000;
-  width: 100%;
-  height: $header-height;
-  transition: all 0.35s ease;
+  width: min(100%, 768px);
+  margin: 0 auto;
+  padding: 0 clamp(0.75rem, 2%, 1.5rem);
+}
 
-  a {
-    color: $body-bg;
-  }
-
-  // サイトタイトルがテキストの場合 (ロゴ未使用の場合)
-  // モバイル時は header 背景透過
-  // responsiveColor有効時には、文字色は白になる
-  @media (max-width: breakpoint("md") - 0.1) {
-    .gNav__siteBrand.responsiveColor a {
-      color: $link-color;
-
-      &:hover {
-        color: $link-hover-color;
-      }
-    }
-  }
-
-  // タブレット・デスクトップ時は header 背景を白 (gNavの視認性)
-  // マウスオーバー時、およびファーストビューの未スクロール時の設定 
-  @media (min-width: breakpoint("md")) {
-    &:hover, &--active {
-      background-color: $body-bg;
-
-      a, .gNav__siteBrand.responsiveColor a {
-        color: $link-color !important; // .responsiveColor
-
-        &:hover {
-          color: $link-hover-color !important;
-        }
-      }
-    }
-  }
-
-  &__container {
-    @include container();
-    height: 100%;
-  }
+#logo {
+  width: 7.2rem;
 }

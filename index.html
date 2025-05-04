@@ -3,212 +3,71 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAMPLE DEMO | QWEL in Action</title>
+    <title>Contact Form | QWEL in Action</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Noto+Sans:wght@100..900&family=Noto+Serif:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
-    <link rel="icon" href="./favicon.ico">
   </head>
   <body>
-    <div id="app">
-      <header id="header" class="header">
-        <div class="header__container">
-          <nav id="gNav" class="gNav">
-            <h1 class="gNav__siteBrand responsiveColor">
-              <a href="/demo/">Sample Demo</a>
-            </h1>
-            <ul class="gNav__primaryMenu util--visible_md">
-              <li class="gNav__menuItem" v-for="section in sections">
-                <a :href="`#${section.id}`" v-html="section.name"></a>
-              </li>
-            </ul>
-            <ul class="gNav__socialMenu util--visible_md">
-              <template v-for="(item, key) in social">
-                <li class="gNav__menuItem gNav__menuItem--social" v-if="item">
-                  <a :href="`https://${key}.com/`">
-                    <svg :class="`icon icon--si icon--${key} icon--md`" width="36" height="36" aria-hidden="true">
-                      <use :href="`./assets/icons.svg#si-${key}`"></use>
-                    </svg>
-                  </a>
-                </li>
-              </template>
-            </ul>
-          </nav>
+    <header class="header">
+      <h1 id="logo"><a href="https://qwel.design/"><img src="./logo_animation.svg" alt="QWEL in Action"></a></h1>
+      <ul class="breadcrumb">
+        <li class="breadcrumb__item"><a href="https://qwel.design/">QWEL in Action</a></li>
+        <li class="breadcrumb__item"><a href="../">Creative Tools</a></li>
+        <li class="breadcrumb__item  breadcrumb__item--current"><span>Contact Form</span></li>
+      </ul>
+    </header>
+    <main class="main">
+      <h2 class="main__title">Contact Form | Created by <span> ― QWEL.DESIGN</span></h2>
+      <p>このページは、<strong>QWEL.DESIGN</strong> への<strong>お問い合わせフォーム</strong>です。
+        <br>お気軽にお問い合わせください。</p>
+      <form class="form" method="post" action="./php/mail.php">
+        <table class="form__table">
+          <tr>
+            <th><label for="yourname">氏名<span class="required">*必須</span></label></th>
+            <td><input id="yourname" size="30" type="text" name="氏名"></td>
+          </tr>
+          <tr>
+            <th><label for="youremail">メールアドレス<span class="required">*必須</span></label></th>
+            <td><input id="youremail" size="30" type="email" name="Email"></td>
+          </tr>
+          <tr>
+            <th><label for="yoursubject">題名</label></th>
+            <td>
+              <select id="yoursubject" name="題名">
+                <option value="ご質問・お問い合わせ">ご質問・お問い合わせ</option>
+                <option value="その他">その他</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <th><label for="yourcontent">メッセージ本文</label></th>
+            <td><textarea id="yourcontent" name="メッセージ本文" cols="30" rows="6"></textarea></td>
+          </tr>
+        </table>
+        <div class="form__buttons">
+          <input type="submit" value="確認">
         </div>
-      </header>
-      <main id="main" class="main">
-        <header id="hero" class="hero">
-          <div class="hero__content">
-            <p>Welcome to our website.
-              <br>This page is a Sample Demo, 
-              <br>so some links and buttons may not work.</p>
-            <a class="button button--primary button--md" href="https://qwel.design/">QWEL.DESIGN</a>
-          </div>
-        </header>
-        <section :id="sections['feature'].id" class="section">
-          <div class="section__inner">
-            <h2 class="section__heading util--pb_large">{{ sections['feature'].name }}</h2>
-            <div class="slider" data-gap="72">
-              <figure class="slider__inner">
-                <figure class="slider__item" v-for="item in sections['feature'].items">
-                  <img class="slider__image" :src="item.src">
-                  <figcaption class="slider__caption"><a href="#">{{ item.heading }}</a></figcaption>
-                </figure>
-              </figure>
-            </div>
-          </div>
-        </section>
-        <section :id="sections['about'].id" class="section">
-          <div class="section__inner">
-            <h2 class="section__heading">{{ sections['about'].name }}</h2>
-            <div class="section__container">
-              <article class="postItem postItem--single">
-                <figure class="postItem__image">
-                  <img :src="sections['about'].src">
-                </figure>
-                <div class="postItem__content">
-                  <h3 class="postItem__heading">{{ sections['about'].heading }}</h3>
-                  <p class="postItem__excerpt">{{ sections['about'].excerpt }}</p>
-                  <div class="postItem__more">
-                    <a class="button button--secondary button--sm" href="#">{{ sections['about'].more }}</a>
-                  </div>
-                </div>
-              </article>
-            </div>
-          </div>
-        </section>
-        <section :id="sections['service'].id" class="section">
-          <div class="section__inner">
-            <h2 class="section__heading">{{ sections['service'].name }}</h2>
-            <div class="section__container">
-              <div class="postList postList--grid">
-                <div class="postList__item" v-for="item in sections['service'].items">
-                  <section class="postItem">
-                    <figure class="postItem__image">
-                      <img :src="item.src">
-                    </figure>
-                    <div class="postItem__content">
-                      <div class="postItem__info">
-                        <div class="postItem__date">{{ item.data }}</div>
-                        <div class="postItem__terms">
-                          <a href="#" v-for="tag in item.tags">{{ tag }}</a>
-                        </div>
-                      </div>
-                      <h3 class="postItem__heading">{{ item.heading }}</h3>
-                      <p class="postItem__excerpt">{{ item.excerpt }}</p>
-                      <div class="postItem__more">
-                        <a href="#">{{ sections['service'].more }} &gt;</a>
-                      </div>
-                    </div>
-                  </section>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section :id="sections['news'].id" class="section">
-          <div class="section__inner">
-            <h2 class="section__heading">{{ sections['news'].name }}</h2>
-            <div class="section__container">
-              <ul class="postList postList--list">
-                <li class="postList__item" v-for="item in sections['news'].items">
-                  <div class="postItem">
-                    <figure class="postItem__image">
-                      <img :src="item.src">
-                    </figure>
-                    <div class="postItem__content">
-                      <div class="postItem__info">
-                        <div class="postItem__date">{{ item.date }}</div>
-                        <div class="postItem__terms">
-                          <a href="#" v-for="tag in item.tags">{{ tag }}</a>
-                        </div>
-                      </div>
-                      <h3 class="postItem__heading">{{ item.heading }}</h3>
-                      <p class="postItem__excerpt">{{ item.excerpt }}</p>
-                      <div class="postItem__more">
-                        <a href="#">{{ sections['news'].more }} &gt;</a>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </section>
-        <section :id="sections['team'].id" class="section">
-          <div class="section__inner">
-            <h2 class="section__heading">{{ sections['team'].name }}</h2>
-            <div class="section__container">
-              <article class="postItem postItem--single">
-                <figure class="postItem__image">
-                  <img :src="sections['team'].src">
-                </figure>
-                <div class="postItem__content">
-                  <h3 class="postItem__heading">{{ sections['team'].heading }}</h3>
-                  <p class="postItem__excerpt">{{ sections['team'].excerpt }}</p>
-                  <div class="postItem__more">
-                    <a class="button button--tertiary button--sm" href="#">{{ sections['team'].more }}</a>
-                  </div>
-                </div>
-              </article>
-            </div>
-          </div>
-        </section>
-        <section :id="sections['access'].id" class="section">
-          <div class="section__inner util--pb_none">
-            <h2 class="section__heading util--pb_large">{{ sections['access'].name }}</h2>
-            <div class="embed">
-              <iframe :src="sections['access'].src"></iframe>
-            </div>
-          </div>
-        </section>
-        <section :id="sections['contact'].id" class="section">
-          <div class="section__inner">
-            <h2 class="section__heading">{{ sections['contact'].name }}</h2>
-            <div class="section__container section__container--md">
-              <p class="util--text_center">{{ sections['contact'].description }}</p>
-              <form class="form">
-                <table class="form__table">
-                  <tr>
-                    <th><label for="yourname">氏名<span class="required">*必須</span></label></th>
-                    <td><input id="yourname" size="30" type="text" name="氏名"></td>
-                  </tr>
-                  <tr>
-                    <th><label for="youremail">メールアドレス<span class="required">*必須</span></label></th>
-                    <td><input id="youremail" size="30" type="email" name="Email"></td>
-                  </tr>
-                  <tr>
-                    <th><label for="yoursubject">題名</label></th>
-                    <td>
-                      <select id="yoursubject" name="題名">
-                        <option value="ご質問・お問い合わせ">ご質問・お問い合わせ</option>
-                        <option value="その他">その他</option>
-                      </select>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th><label for="yourcontent">メッセージ本文</label></th>
-                    <td><textarea id="yourcontent" name="メッセージ本文" cols="30" rows="6"></textarea></td>
-                  </tr>
-                </table>
-                <div class="form__buttons">
-                  <input class="button button--primary button--lg" type="submit" value="確認">
-                </div>
-              </form>
-            </div>
-          </div>
-        </section>
-      </main>
-      <div class="cover fader preloader" data-spinner-off="true">
-        <div class="cover__inner">
-          <div class="cover__image cover__image--num_1"></div>
-          <div class="cover__image cover__image--num_2"></div>
-          <div class="cover__image cover__image--num_3"></div>
-          <div class="cover__image cover__image--num_4"></div>
-        </div>
-      </div>
-      <footer id="footer" class="footer">
+      </form>
+    </main>
+    <footer id="footer" class="footer">
+      <div class="footer__inner">
+        <a class="footer__item footer__item--github" href="https://github.com/qweldesign" target="_blank" rel="noopener">
+          <svg class="icon icon--si icon--github icon--md" width="36" height="36" aria-hidden="true">
+            <use href="./icons.svg#si-github"></use>
+          </svg>
+          <span>GitHub</span>
+        </a>
+        <a class="footer__item footer__item--contact" href="https://tools.qwel.design/contact-form/" target="_blank" rel="noopener">
+          <svg class="icon icon--si icon--mail icon--md" width="36" height="36" aria-hidden="true">
+            <use href="./icons.svg#si-mail"></use>
+          </svg>
+          <span>Contact Me</span>
+        </a>
         <small class="footer__copyright"></small>
-      </footer>
-    </div>
-    <script src="./init.js" type="module"></script>
+      </div>
+    </footer>
+    <script src="./init.js"></script>
   </body>
 </html>
