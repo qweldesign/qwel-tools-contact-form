@@ -1,0 +1,67 @@
+/**
+ * Form
+ */
+
+.form {
+  @include form();
+  margin-block-end: space("large");
+  text-align: center;
+
+  table {
+    @include table();
+    margin-block-end: space("large");
+    text-align: left;
+
+    th {
+      width: 12rem;
+    }
+
+    input, select, textarea {
+      border: none;
+      border-radius: space("x-small");
+      background-color: rgba(map-get($colors, $theme-accent), 0.05);
+    }
+  }
+
+  [type="submit"] {
+    display: inline-block;
+    width: 14rem;
+    height: 3.5rem;
+    line-height: 3.5rem;
+    margin-inline: space();
+    @include make-button();
+    @include make-button-color-normal("primary");
+  }
+}
+
+.confirm {
+  table {
+    @include table();
+    margin-block-end: space("large");
+
+    th {
+      width: 12rem;
+    }
+
+    td {
+      text-align: left;
+    }
+  }
+
+  [type="submit"], [type="button"] {
+    display: inline-block;
+    width: 14rem;
+    height: 3.5rem;
+    line-height: 3.5rem;
+    margin-inline: space();
+    @include make-button();
+  }
+
+  [type="submit"] {
+    @include make-button-color-normal("primary");
+  }
+  
+  [type="button"] {
+    @include make-button-color-normal("secondary");
+  }
+}

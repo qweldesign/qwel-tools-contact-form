@@ -3,13 +3,69 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Starter Template</title>
+    <title>Contact Form | QWEL in Action</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Noto+Sans:wght@100..900&family=Noto+Serif:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
-    <link rel="icon" href="./favicon.ico">
   </head>
   <body>
-    
-
-
+    <header class="header">
+      <h1 id="logo"><a href="https://qwel.design/"><img src="./logo_animation.svg" alt="QWEL in Action"></a></h1>
+      <ul class="breadcrumb">
+        <li class="breadcrumb__item"><a href="https://qwel.design/">QWEL in Action</a></li>
+        <li class="breadcrumb__item"><a href="../">Creative Tools</a></li>
+        <li class="breadcrumb__item  breadcrumb__item--current"><span>Contact Form</span></li>
+      </ul>
+    </header>
+    <main class="main">
+      <h2 class="main__title">Contact Form | Created by <span> ― QWEL.DESIGN</span></h2>
+      <p>このページは、<strong>QWEL.DESIGN</strong> への<strong>お問い合わせフォーム</strong>です。
+        <br>お気軽にお問い合わせください。</p>
+      <form class="form" data-contact-form>
+        <table>
+          <tr>
+            <th><label for="your-name">お名前<span class="required">*必須</span></label></th>
+            <td><input id="your-name" size="30" type="text" name="お名前" required></td>
+          </tr>
+          <tr>
+            <th><label for="your-email">メールアドレス<span class="required">*必須</span></label></th>
+            <td><input id="your-email" size="30" type="email" name="Email" required></td>
+          </tr>
+          <tr>
+            <th><label for="your-subject">件名</label></th>
+            <td>
+              <select id="your-subject" name="件名">
+                <option value="ご質問・お問い合わせ">ご質問・お問い合わせ</option>
+                <option value="その他">その他</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <th><label for="your-message">メッセージ本文</label></th>
+            <td><textarea id="your-message" name="メッセージ本文" cols="30" rows="6"></textarea></td>
+          </tr>
+        </table>
+        <input type="submit" value="確認">
+      </form>
+    </main>
+    <footer id="footer" class="footer">
+      <div class="footer__inner">
+        <a class="footer__item footer__item--github" href="https://github.com/qweldesign" target="_blank" rel="noopener">
+          <svg class="icon icon--si icon--github icon--md" width="36" height="36" aria-hidden="true">
+            <use href="./icons.svg#si-github"></use>
+          </svg>
+          <span>GitHub</span>
+        </a>
+        <a class="footer__item footer__item--contact" href="https://tools.qwel.design/contact-form/" target="_blank" rel="noopener">
+          <svg class="icon icon--si icon--mail icon--md" width="36" height="36" aria-hidden="true">
+            <use href="./icons.svg#si-mail"></use>
+          </svg>
+          <span>Contact Me</span>
+        </a>
+        <small class="footer__copyright"></small>
+      </div>
+    </footer>
+    <script src="./init.js" type="module"></script>
   </body>
 </html>

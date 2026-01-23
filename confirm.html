@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>確認画面 | QWEL in Action</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Noto+Sans:wght@100..900&family=Noto+Serif:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <style>
+      #confirm {
+        width: min(100%, 768px);
+        margin: 0 auto;
+        padding: 0 clamp(0.75rem, 3.125%, 1.5rem);
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="confirm" class="confirm">
+      <h1>内容確認</h1>
+      <table data-contact-confirm></table>
+      <input type="submit" value="送信する" data-contact-send>
+      <input type="button" value="前画面に戻る" data-contact-back>
+    </div>
+    <script src="init.js" type="module"></script>
+  </body>
+</html>

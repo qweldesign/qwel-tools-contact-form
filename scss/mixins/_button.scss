@@ -23,17 +23,19 @@ $button-transform:         scale(96%) !default;
 
 // ボタンの基本プロパティだけ出力 (インライン要素で作成したい場合等)
 @mixin make-button($rounded: $boutton-rounded) {
-  border: 0;
-  border-radius: $rounded;
-  text-align: center;
-  text-decoration: none;
-  word-break: break-word;
-  outline: 0;
-  user-select: none;
-  cursor: pointer;
-  transition: all 0.5s ease;
+  &, &:active {
+    border: 0;
+    border-radius: $rounded;
+    text-align: center;
+    text-decoration: none;
+    word-break: break-word;
+    outline: 0;
+    user-select: none;
+    cursor: pointer;
+    transition: all 0.5s ease;
+  }
 
-  &:hover {
+  &:hover, &:focus {
     text-decoration: none;
     @if ($button-transform-enabled) {
       transform: $button-transform;
@@ -49,7 +51,7 @@ $button-transform:         scale(96%) !default;
     @include make-button-color-normal($key);
   }
   @if ($button-transform-enabled) {
-    &:hover {
+    &:hover, &:focus {
       box-shadow: 0 0 space() theme-color($key);
     }
   }
@@ -57,10 +59,12 @@ $button-transform:         scale(96%) !default;
 
 // 通常の色作成
 @mixin make-button-color-normal($key: $theme-accent) {
-  background-color: theme-color($key);
-  color: color-yiq($key);
+  &, &:active {
+    background-color: theme-color($key);
+    color: color-yiq($key);
+  }
 
-  &:hover {
+  &:hover, &:focus {
     background-color: color-active($key);
     color: color-yiq($key, true);
   }
@@ -71,12 +75,14 @@ $button-transform:         scale(96%) !default;
   $base:       map-get($theme-colors, $key);
   $hightlight: lighten($base, 20%);
 
-  color: color-yiq($key);
-  background: linear-gradient(-30deg, $base, $hightlight, $base, $base);
-  background-position: 0% 0%;
-  background-size: 150% 100%;
+  &, &:active {
+    color: color-yiq($key);
+    background: linear-gradient(-30deg, $base, $hightlight, $base, $base);
+    background-position: 0% 0%;
+    background-size: 150% 100%;
+  }
 
-  &:hover {
+  &:hover, &:focus {
     color: color-yiq($key);
     background-position: 100% 0%;
   }
