@@ -2,7 +2,7 @@
 
 軽量・シンプルなお問い合わせフォーム
 
-▶ Sample DEMO: [https://tools.qwel.design/contact-form/]
+▶ Sample DEMO: [https://qwel.design/tools/contact-form/]
 
 ## ライセンス | License
 

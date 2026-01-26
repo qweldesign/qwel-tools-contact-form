@@ -211,7 +211,7 @@ button, input, select, textarea {
   flex: 0 0 auto;
   margin: 0;
 }
-.breadcrumb__item:not(.breadcrumb__item--current)::after {
+.breadcrumb__item:not(.is-current)::after {
   content: ">";
   margin: 0 var(--spacing--small);
 }
@@ -258,12 +258,12 @@ button, input, select, textarea {
   color: var(--color--primary--active);
   font-size: 1.5em;
 }
-.main__listItem--spec {
+.main__listItem.is-spec {
   color: var(--color--dark);
   font-size: 0.875rem;
   letter-spacing: var(--heading-letter-spacing);
 }
-.main__listItem--spec::before {
+.main__listItem.is-spec::before {
   content: "―";
   margin-inline-end: var(--spacing--x-small);
   padding-inline-end: 0.5em;
@@ -325,11 +325,11 @@ button, input, select, textarea {
   overflow: hidden;
   fill: currentColor;
 }
-.icon--md {
+.icon.is-md {
   width: 2.25rem;
   height: 2.25rem;
 }
-.icon--lg {
+.icon.is-lg {
   width: 3rem;
   height: 3rem;
 }
@@ -341,14 +341,14 @@ button, input, select, textarea {
   border-color: var(--color--lightest);
   transition: border-color 0.25s ease;
 }
-.icon--menu .icon__span {
+.icon.is-menu .icon__span {
   width: 60%;
   height: 20%;
   margin: 40% 20%;
   border-block-start-width: 2px;
   border-block-end-width: 2px;
 }
-.icon--close .icon__span::before, .icon--close .icon__span::after {
+.icon.is-close .icon__span::before, .icon.is-close .icon__span::after {
   content: "";
   position: absolute;
   display: block;
@@ -358,10 +358,10 @@ button, input, select, textarea {
   border: 1px solid var(--color--lightest);
   transform: rotate(-45deg);
 }
-.icon--close .icon__span::after {
+.icon.is-close .icon__span::after {
   transform: rotate(45deg);
 }
-.icon--chevron-up .icon__span {
+.icon.is-chevron-up .icon__span {
   width: 30%;
   height: 30%;
   margin: 35%;
@@ -369,7 +369,7 @@ button, input, select, textarea {
   border-inline-start-width: 2px;
   transform: rotate(45deg) translate(10%, 10%);
 }
-.icon--chevron-down .icon__span {
+.icon.is-chevron-down .icon__span {
   width: 30%;
   height: 30%;
   margin: 35%;
@@ -377,7 +377,7 @@ button, input, select, textarea {
   border-block-end-width: 2px;
   transform: rotate(45deg) translate(-10%, -10%);
 }
-.icon--chevron-left .icon__span {
+.icon.is-chevron-left .icon__span {
   width: 30%;
   height: 30%;
   margin: 35%;
@@ -385,7 +385,7 @@ button, input, select, textarea {
   border-block-end-width: 2px;
   transform: rotate(45deg) translate(10%, -10%);
 }
-.icon--chevron-right .icon__span {
+.icon.is-chevron-right .icon__span {
   width: 30%;
   height: 30%;
   margin: 35%;
