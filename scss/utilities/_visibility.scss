@@ -2,9 +2,9 @@
  * Utility - Visibility
  */
 
-.util--visible {
+.visible {
   @each $key, $breakpoint in $breakpoints {
-    &_#{$key} {
+    &-#{$key} {
       @media (max-width: $breakpoint - 0.1) {
         display: none !important;
       }

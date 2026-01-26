@@ -89,7 +89,7 @@ $button-transform:         scale(96%) !default;
 }
 
 @mixin button($key: $theme-accent, $width: $button-width, $height: $width / 3, $rounded: $boutton-rounded) {
-  $height: min($height, 4.5rem);
+  $height: min($height, $button-max-height);
   @include make-block($width, $height);
   @include make-button($rounded);
   @include make-button-color($key);

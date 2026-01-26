@@ -42,12 +42,12 @@ $icon-size-lg:     3rem !default;
   overflow: hidden;
   fill: currentColor;
 
-  &--md {
+  &.is-md {
     width: $icon-size-md;
     height: $icon-size-md;
   }
 
-  &--lg {
+  &.is-lg {
     width: $icon-size-lg;
     height: $icon-size-lg;
   }
@@ -60,7 +60,7 @@ $icon-size-lg:     3rem !default;
     border-color: theme-color("lightest");
     transition: border-color 0.25s ease;
 
-    .icon--menu & {
+    .icon.is-menu & {
       width: 60%;
       height: 20%;
       margin: 40% 20%;
@@ -68,7 +68,7 @@ $icon-size-lg:     3rem !default;
       border-block-end-width: 2px;
     }
 
-    .icon--close & {
+    .icon.is-close & {
       &::before, &::after {
         content: "";
         position: absolute;
@@ -85,7 +85,7 @@ $icon-size-lg:     3rem !default;
       }
     }
 
-    .icon--chevron-up & {
+    .icon.is-chevron-up & {
       width: 30%;
       height: 30%;
       margin: 35%;
@@ -94,7 +94,7 @@ $icon-size-lg:     3rem !default;
       transform: rotate(45deg) translate(10%, 10%);
     }
 
-    .icon--chevron-down & {
+    .icon.is-chevron-down & {
       width: 30%;
       height: 30%;
       margin: 35%;
@@ -103,7 +103,7 @@ $icon-size-lg:     3rem !default;
       transform: rotate(45deg) translate(-10%, -10%);
     }
 
-    .icon--chevron-left & {
+    .icon.is-chevron-left & {
       width: 30%;
       height: 30%;
       margin: 35%;
@@ -112,7 +112,7 @@ $icon-size-lg:     3rem !default;
       transform: rotate(45deg) translate(10%, -10%);
     }
 
-    .icon--chevron-right & {
+    .icon.is-chevron-right & {
       width: 30%;
       height: 30%;
       margin: 35%;

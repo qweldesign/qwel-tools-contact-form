@@ -8,14 +8,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Noto+Sans:wght@100..900&family=Noto+Serif:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="/assets/favicon.ico" sizes="32x32">
+    <link rel="icon" href="/assets/logo_static.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   </head>
   <body>
     <header class="header">
-      <h1 id="logo"><a href="https://qwel.design/"><img src="./logo_animation.svg" alt="QWEL in Action"></a></h1>
+      <h1 id="logo"><a href="https://qwel.design/"><img src="./assets/logo.svg" alt="QWEL in Action"></a></h1>
       <ul class="breadcrumb">
         <li class="breadcrumb__item"><a href="https://qwel.design/">QWEL in Action</a></li>
         <li class="breadcrumb__item"><a href="../">Creative Tools</a></li>
-        <li class="breadcrumb__item  breadcrumb__item--current"><span>Contact Form</span></li>
+        <li class="breadcrumb__item  is-current"><span>Contact Form</span></li>
       </ul>
     </header>
     <main class="main">
@@ -25,11 +28,11 @@
       <form class="form" data-contact-form>
         <table>
           <tr>
-            <th><label for="your-name">お名前<span class="required">*必須</span></label></th>
+            <th><label for="your-name">お名前<span class="is-required">*必須</span></label></th>
             <td><input id="your-name" size="30" type="text" name="お名前" required></td>
           </tr>
           <tr>
-            <th><label for="your-email">メールアドレス<span class="required">*必須</span></label></th>
+            <th><label for="your-email">メールアドレス<span class="is-required">*必須</span></label></th>
             <td><input id="your-email" size="30" type="email" name="Email" required></td>
           </tr>
           <tr>
@@ -51,15 +54,15 @@
     </main>
     <footer id="footer" class="footer">
       <div class="footer__inner">
-        <a class="footer__item footer__item--github" href="https://github.com/qweldesign" target="_blank" rel="noopener">
-          <svg class="icon icon--si icon--github icon--md" width="36" height="36" aria-hidden="true">
-            <use href="./icons.svg#si-github"></use>
+        <a class="footer__item is-github" href="https://github.com/qweldesign" target="_blank" rel="noopener">
+          <svg class="icon is-si-github is-md" width="36" height="36" aria-hidden="true">
+            <use href="./assets/icons.svg#si-github"></use>
           </svg>
           <span>GitHub</span>
         </a>
-        <a class="footer__item footer__item--contact" href="https://tools.qwel.design/contact-form/" target="_blank" rel="noopener">
-          <svg class="icon icon--si icon--mail icon--md" width="36" height="36" aria-hidden="true">
-            <use href="./icons.svg#si-mail"></use>
+        <a class="footer__item is-contact" href="https://qwel.design/tools/contact-form/" target="_blank" rel="noopener">
+          <svg class="icon is-si-mail is-md" width="36" height="36" aria-hidden="true">
+            <use href="./assets/icons.svg#si-mail"></use>
           </svg>
           <span>Contact Me</span>
         </a>

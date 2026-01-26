@@ -4,8 +4,8 @@
   label {
     display: block;
 
-    span.required {
-      color: orange;
+    span.is-required {
+      color: theme-color("secondary");
       @include small-text();
     }
   }

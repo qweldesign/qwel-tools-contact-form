@@ -12,9 +12,9 @@ $grays:            (
 ) !default;
 
 $colors:           (
-  primary:           hsl(200, 60%, 50%),
-  secondary:         hsl(30, 100%, 60%),
-  tertiary:          hsl(80, 60%, 50%)
+  primary:             #209fdf, // hsl(200, 75%, 50%) oklch(66.7% 0.139 237.8)
+  secondary:           #ffc080, // hsl(30, 100%, 75%) oklch(85.2% 0.108 65.9)
+  tertiary:            #99cc33  // hsl(80, 60%, 50%) oklch(78.2% 0.182 126.8)
 ) !default;
 
 $theme-colors:     map-merge($grays, $colors) !default;
