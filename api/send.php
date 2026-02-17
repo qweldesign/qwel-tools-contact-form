@@ -1,4 +1,9 @@
 <?php
+require __DIR__ . '/vendor/autoload.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 mb_language('Japanese');
 mb_internal_encoding('UTF-8');
 
@@ -7,6 +12,12 @@ mb_internal_encoding('UTF-8');
 $site_title = 'QWEL.DESIGN';
 $site_url = 'https://qwel.design';
 $admin_email = 'webmaster@qwel.design';
+
+// SMTP設定（heteml想定）
+$smtp_host = 'smtp.hetemail.jp';
+$smtp_user = 'webmaster@qwel.design';
+$smtp_pass = '******'; // ← 必ず書き換える!!
+$smtp_port = 587;
 
 // 署名設定
 $mailFooter = <<< TEXT
@@ -60,30 +71,46 @@ if (preg_match('/[\r\n]/', $data[$Email])) {
   exit('不正な入力が検出されました');
 }
 
-// メールヘッダ作成
-$mailHeader = implode("\r\n", [
-  "From: {$site_title} <{$admin_email}>",
-  "Reply-To: {$data[$Email]}",
-]);
-
 // メール本文作成
 $mailBody = postToMail($data);
 
-// 管理者宛
-mb_send_mail(
-  $admin_email,
-  "{$site_title} からのお問い合わせ",
-  "以下の内容で受け付けました。\n\n" . $mailBody,
-  $mailHeader
-);
+// メール送信
+try {
+  $mail = new PHPMailer(true);
+  $mail->isSMTP();
+  $mail->Host       = $smtp_host;
+  $mail->SMTPAuth   = true;
+  $mail->Username   = $smtp_user;
+  $mail->Password   = $smtp_pass;
+  $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+  $mail->Port       = $smtp_port;
 
-// 自動返信
-mb_send_mail(
-  $data[$Email],
-  "{$site_title} へのお問い合わせありがとうございます",
-  "以下の内容で受け付けました。\n\n" . $mailBody . $mailFooter,
-  "From: {$site_title} <{$admin_email}>"
-);
+  $mail->CharSet = 'UTF-8';
+
+  // 管理者宛
+  $mail->setFrom($admin_email, $site_title);
+  $mail->addAddress($admin_email);
+  $mail->addReplyTo($data[$Email]);
+
+  $mail->Subject = "{$site_title} からのお問い合わせ";
+  $mail->Body    = "以下の内容で受け付けました。\n\n" . $mailBody;
+  $mail->send();
+
+  $mail->clearAddresses();
+  $mail->clearReplyTos();
+
+  // 自動返信
+  $mail->setFrom($admin_email, $site_title);
+  $mail->addAddress($data[$Email]);
+
+  $mail->Subject = "{$site_title} へのお問い合わせありがとうございます";
+  $mail->Body    = "以下の内容で受け付けました。\n\n" . $mailBody . $mailFooter;
+  $mail->send();
+
+} catch (Exception $e) {
+  http_response_code(500);
+  exit;
+}
 
 http_response_code(204);
 
@@ -99,7 +126,7 @@ function postToMail(array $post) {
       $value = implode(', ', $value);
     }
 
-     $body .= "{$key}: {$value}\n";
+    $body .= "{$key}: {$value}\n";
   }
 
   return $body;
