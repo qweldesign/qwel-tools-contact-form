@@ -1,0 +1,9 @@
+/**
+ * Layout - Footer
+ */
+
+.footer {
+  padding: space("x-large");
+  @include background($theme-accent);
+  text-align: center;
+}

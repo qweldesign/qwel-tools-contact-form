@@ -1,0 +1,52 @@
+/**
+ * Layout - Header
+ */
+
+$header-height:  4.5rem !default;
+
+.header {
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+  height: $header-height;
+  transition: all 0.35s ease;
+
+  a {
+    color: $body-bg;
+  }
+
+  // サイトタイトルがテキストの場合 (ロゴ未使用の場合)
+  // モバイル時は header 背景透過
+  // 白文字にテキストシャドウを入れる
+  @media (max-width: breakpoint("md") - 0.1) {
+    .gNav__siteBrand a {
+      color: theme-color("lightest");
+      text-shadow: 0 0 6px #000;
+
+      &:hover {
+        color: theme-color("lightest");
+      }
+    }
+  }
+
+  // タブレット・デスクトップ時は header 背景を白 (gNavの視認性)
+  // マウスオーバー時、およびファーストビューのスクロール時の設定 
+  @media (min-width: breakpoint("md")) {
+    &:hover, &:not(.is-active) {
+      background-color: $body-bg;
+
+      a, .gNav__siteBrand a {
+        color: $link-color;
+
+        &:hover {
+          color: $link-hover-color;
+        }
+      }
+    }
+  }
+
+  &__container {
+    @include container();
+    height: 100%;
+  }
+}

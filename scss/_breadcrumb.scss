@@ -1,0 +1,35 @@
+/**
+ * Component - Breadcrumb
+ */
+
+.breadcrumb {
+  list-style: none;
+  display: flex;
+  flex-flow: row wrap;
+  padding: 0;
+
+  &__item {
+    flex: 0 0 auto;
+    margin: 0;
+
+    &:not(.is-current)::after {
+      content: ">";
+      margin: 0 space();
+    }
+
+    a, span {
+      display: inline-block;
+      font-weight: 600;
+      font-style: normal;
+      font-size: 0.875rem;
+      color: theme-color("darker");
+      background-color: rgba(map-get($theme-colors, "secondary"), 0.15);
+      padding: 0 0.2em;
+      border-radius: 0.2em;
+    }
+
+    span {
+      background-color: rgba(map-get($theme-colors, "primary"), 0.1);
+    }
+  }
+}

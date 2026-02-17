@@ -1,0 +1,25 @@
+/**
+ * Component - Button
+ */
+
+.button {
+  @include make-button();
+
+  @each $key, $color in $colors {
+    &.is-#{$key} {
+      @include make-button-color($key);
+    }
+  }
+
+  &.is-sm {
+    @include make-block(10.5rem);
+  }
+  
+  &.is-md {
+    @include make-block(16.5rem, 4.5rem);
+  }
+  
+  &.is-lg {
+    @include make-block(22.5rem, 4.5rem);
+  }
+}

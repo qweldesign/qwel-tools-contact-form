@@ -5,13 +5,33 @@
 .section {
   &__inner {
     padding-block: space("large");
+
+    :where(&) {
+      background-color: $body-bg;
+    }
+
+    // Test Responsive Color
+    :where(.section:nth-child(odd) &) {
+      @include background("darker");
+    }
+  }
+
+  &__heading {
+    margin: space("medium") 0;
+    text-align: center;
+    text-transform: capitalize;
   }
 
   &__container {
-    @include container();
-  }
+    padding-block-start: calc(#{space()} + #{space("medium")});
+    padding-block-end: space("large");
 
-  &__row {
-    @include row();
+    &:not(.section__container.is-md) {
+      @include container();
+    }
+
+    &.is-md {
+      @include container("md");
+    }
   }
 }

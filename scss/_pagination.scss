@@ -1,0 +1,28 @@
+/**
+ * Component - Pagination
+ */
+
+.pagination {
+  @include list-unstyled();
+  @include row(center, center);
+  gap: space();
+  width: 100%;
+
+  &__item {
+    & > a {
+      @include make-block(2rem, 3rem);
+      @include make-button();
+      @include make-button-color();
+    }
+
+    & > span {
+      @include make-block(2rem, 3rem);
+      border-radius: $boutton-rounded;
+      background-color: color-active($theme-accent);
+      color: color-yiq($theme-accent, true);
+      text-align: center;
+      text-decoration: none;
+      word-break: break-word;
+    }
+  }
+}

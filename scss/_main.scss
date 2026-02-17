@@ -1,0 +1,21 @@
+/**
+ * Main
+ */
+
+.main {
+  &__container {
+    @include container("md");
+  }
+
+  &__row {
+    @include row(flex-start, flex-start);
+  }
+
+  &__article {
+    @include col(6, false, "md");
+  }
+
+  &__aside {
+    @include col(3, false, "md");
+  }
+}
