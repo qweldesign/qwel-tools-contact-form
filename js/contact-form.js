@@ -28,7 +28,14 @@ export default class ContactForm {
       event.preventDefault();
 
       // フォームのデータを SessionStorage に格納
-      const data = Object.fromEntries(new FormData(this.form));
+      const formData = new FormData(this.form); // FormData をそのまま扱う (重複キー対応)
+      const data = {};
+
+      for (const key of formData.keys()) {
+        const values = formData.getAll(key); // 同じキーの値を全部取得
+        data[key] = values.length === 1 ? values[0] : values; // 1つなら文字列, 複数なら配列
+      }
+
       sessionStorage.setItem(this.storageKey, JSON.stringify(data));
 
       // 確認画面へ遷移
