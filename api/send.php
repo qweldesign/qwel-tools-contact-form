@@ -40,8 +40,9 @@ $Email = 'Email'; // フォームのEmail入力箇所のname属性の値
 // Originチェック & Refererチェック (CSRF対策)
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
 $referer = $_SERVER['HTTP_REFERER'] ?? '';
+// Originが不正 OR Refererが不正 → 弾く
 if (
-  ($origin && strpos($origin, $site_url) !== 0) &&
+  ($origin && strpos($origin, $site_url) !== 0) ||
   ($referer && strpos($referer, $site_url) !== 0)
 ) {
   http_response_code(403);
@@ -76,40 +77,51 @@ $mailBody = postToMail($data);
 
 // メール送信
 try {
-  $mail = new PHPMailer(true);
-  $mail->isSMTP();
-  $mail->Host       = $smtp_host;
-  $mail->SMTPAuth   = true;
-  $mail->Username   = $smtp_user;
-  $mail->Password   = $smtp_pass;
-  $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-  $mail->Port       = $smtp_port;
-
-  $mail->CharSet = 'UTF-8';
-
   // 管理者宛
-  $mail->setFrom($admin_email, $site_title);
-  $mail->addAddress($admin_email);
-  $mail->addReplyTo($data[$Email]);
+  $mail1 = new PHPMailer(true);
+  $mail1->isSMTP();
+  $mail1->Host       = $smtp_host;
+  $mail1->SMTPAuth   = true;
+  $mail1->Username   = $smtp_user;
+  $mail1->Password   = $smtp_pass;
+  $mail1->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+  $mail1->Port       = $smtp_port;
+  $mail1->CharSet    = 'UTF-8';
 
-  $mail->Subject = "{$site_title} からのお問い合わせ";
-  $mail->Body    = "以下の内容で受け付けました。\n\n" . $mailBody;
-  $mail->send();
-
-  $mail->clearAddresses();
-  $mail->clearReplyTos();
-
-  // 自動返信
-  $mail->setFrom($admin_email, $site_title);
-  $mail->addAddress($data[$Email]);
-
-  $mail->Subject = "{$site_title} へのお問い合わせありがとうございます";
-  $mail->Body    = "以下の内容で受け付けました。\n\n" . $mailBody . $mailFooter;
-  $mail->send();
+  $mail1->setFrom($admin_email, $site_title);
+  $mail1->addAddress($admin_email);
+  $mail1->addReplyTo($data[$Email]);
+  $mail1->Subject = "{$site_title} からのお問い合わせ";
+  $mail1->Body    = "以下の内容で受け付けました。\n\n" . $mailBody;
+  $mail1->send();
 
 } catch (Exception $e) {
+  // 管理者宛が失敗したらエラー
   http_response_code(500);
   exit;
+}
+
+// 自動返信は別で処理 (失敗してもユーザーにはエラーを返さない)
+try {
+  $mail2 = new PHPMailer(true);
+  $mail2->isSMTP();
+  $mail2->Host       = $smtp_host;
+  $mail2->SMTPAuth   = true;
+  $mail2->Username   = $smtp_user;
+  $mail2->Password   = $smtp_pass;
+  $mail2->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+  $mail2->Port       = $smtp_port;
+  $mail2->CharSet    = 'UTF-8';
+
+  $mail2->setFrom($admin_email, $site_title);
+  $mail2->addAddress($data[$Email]);
+  $mail2->Subject = "{$site_title} へのお問い合わせありがとうございます";
+  $mail2->Body    = "以下の内容で受け付けました。\n\n" . $mailBody . $mailFooter;
+  $mail2->send();
+
+} catch (Exception $e) {
+  // 自動返信失敗はログだけ残して続行 (ユーザーにはエラーにしない)
+  error_log('自動返信失敗: ' . $e->getMessage() . ' 宛先: ' . $data[$Email]);
 }
 
 http_response_code(204);
