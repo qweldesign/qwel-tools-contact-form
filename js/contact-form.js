@@ -90,22 +90,36 @@ export default class ContactForm {
     const data = sessionStorage.getItem(this.storageKey);
     if (!data) return;
 
-    // APIを使用して送信
-    const res = await fetch('./api/send.php', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: data
-    });
+    // 二重送信防止
+    const sendButton = document.querySelector('[data-contact-send]');
+    if (sendButton) sendButton.disabled = true;
 
-    if (res.ok) {
-      // 送信成功
-      // SessionStorage を空に
-      sessionStorage.removeItem(this.storageKey);
-      // 完了画面へ遷移
-      location.href = 'thanks.html';
-    } else {
-      // 送信失敗
-      alert('送信に失敗しました');
+    // APIを使用して送信
+    try {
+      const res = await fetch('./api/send.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: data
+      });
+
+      if (res.ok) {
+        // 送信成功
+        // SessionStorage を空に
+        sessionStorage.removeItem(this.storageKey);
+        // 完了画面へ遷移
+        location.href = 'thanks.html';
+      } else {
+        // 送信失敗
+        const errorText = await res.text(); // PHPのエラー内容も取得
+        console.error('Server error:', errorText);
+        alert('送信に失敗しました（サーバーエラー）');
+        if (sendButton) sendButton.disabled = false;
+      }
+    } catch (err) {
+      // ネットワークエラー
+      console.error('Network error:', err);
+      alert('送信に失敗しました（通信エラー）');
+      if (sendButton) sendButton.disabled = false;
     }
   }
 }
