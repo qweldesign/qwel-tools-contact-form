@@ -1,0 +1,4 @@
+# .env などのドットファイルと Composer の設定ファイルを Web から読めないようにする
+<FilesMatch "^\.|^composer\.(json|lock)$">
+  Require all denied
+</FilesMatch>

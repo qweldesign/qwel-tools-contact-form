@@ -3,3 +3,6 @@
 
 # Composer
 vendor/
+
+# 設定ファイル（パスワードを含む）
+.env

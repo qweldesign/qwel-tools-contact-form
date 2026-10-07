@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/lib/env.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -7,35 +8,31 @@ use PHPMailer\PHPMailer\Exception;
 mb_language('Japanese');
 mb_internal_encoding('UTF-8');
 
-// 設定項目
-// サイト設定
-$site_title = 'QWEL.DESIGN';
-$site_url = 'https://qwel.design';
-$admin_email = 'webmaster@qwel.design';
+// 設定の読み込み（項目の説明は .env.example を参照）
+// .env を公開ディレクトリの外に置く場合は、このパスを書き換える
+$env_path = __DIR__ . '/.env';
 
-// SMTP設定（heteml想定）
-$smtp_host = 'smtp.hetemail.jp';
-$smtp_user = 'webmaster@qwel.design';
-$smtp_pass = '******'; // ← 必ず書き換える!!
-$smtp_port = 587;
-
-// 署名設定
-$mailFooter = <<< TEXT
-
-後日ご返信致しますので今しばらくお待ちください。
-
-────────────────────────────────────────────────
-福井の物作りのためのweb制作&プログラミング教室
-QWEL.DESIGN (クヴェル・デザイン)
-
-伊藤 大悟 (代表)
-────────────────────────────────────────────────
-
-TEXT;
-
-// 項目設定 (任意)
-$require_fields = ['お名前', 'Email', '件名', 'メッセージ本文']; // 必須項目
-$Email = 'Email'; // フォームのEmail入力箇所のname属性の値
+try {
+  $env = load_env($env_path);
+  $site_title      = env_required($env, 'SITE_TITLE');
+  $site_url        = env_required($env, 'SITE_URL');
+  $admin_email     = env_required($env, 'ADMIN_EMAIL');
+  $smtp = [
+    'host'   => env_required($env, 'SMTP_HOST'),
+    'user'   => env_required($env, 'SMTP_USER'),
+    'pass'   => env_required($env, 'SMTP_PASS'),
+    'port'   => (int) ($env['SMTP_PORT'] ?? 587),
+    'secure' => strtolower($env['SMTP_SECURE'] ?? 'tls'),
+  ];
+  $require_fields  = env_list($env, 'REQUIRED_FIELDS');
+  $Email           = $env['EMAIL_FIELD'] ?? 'Email';
+  $mailFooter      = $env['MAIL_FOOTER'] ?? '';
+} catch (RuntimeException $e) {
+  // 設定ミスの内容はサーバーのログにだけ残す
+  error_log('お問い合わせフォームの設定エラー: ' . $e->getMessage());
+  http_response_code(500);
+  exit;
+}
 
 // Originチェック & Refererチェック (CSRF対策)
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
@@ -78,15 +75,7 @@ $mailBody = postToMail($data);
 // メール送信
 try {
   // 管理者宛
-  $mail1 = new PHPMailer(true);
-  $mail1->isSMTP();
-  $mail1->Host       = $smtp_host;
-  $mail1->SMTPAuth   = true;
-  $mail1->Username   = $smtp_user;
-  $mail1->Password   = $smtp_pass;
-  $mail1->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-  $mail1->Port       = $smtp_port;
-  $mail1->CharSet    = 'UTF-8';
+  $mail1 = createMailer($smtp);
 
   $mail1->setFrom($admin_email, $site_title);
   $mail1->addAddress($admin_email);
@@ -103,15 +92,7 @@ try {
 
 // 自動返信は別で処理 (失敗してもユーザーにはエラーを返さない)
 try {
-  $mail2 = new PHPMailer(true);
-  $mail2->isSMTP();
-  $mail2->Host       = $smtp_host;
-  $mail2->SMTPAuth   = true;
-  $mail2->Username   = $smtp_user;
-  $mail2->Password   = $smtp_pass;
-  $mail2->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-  $mail2->Port       = $smtp_port;
-  $mail2->CharSet    = 'UTF-8';
+  $mail2 = createMailer($smtp);
 
   $mail2->setFrom($admin_email, $site_title);
   $mail2->addAddress($data[$Email]);
@@ -142,4 +123,25 @@ function postToMail(array $post) {
   }
 
   return $body;
+}
+
+// SMTP の設定を済ませた PHPMailer を作る
+function createMailer(array $smtp): PHPMailer {
+  $mail = new PHPMailer(true);
+  $mail->isSMTP();
+  $mail->Host       = $smtp['host'];
+  $mail->SMTPAuth   = true;
+  $mail->Username   = $smtp['user'];
+  $mail->Password   = $smtp['pass'];
+  if ($smtp['secure'] === 'none') {
+    // 暗号化なし（ローカルのテスト用メールサーバー向け）
+    $mail->SMTPSecure = '';
+    $mail->SMTPAutoTLS = false;
+  } else {
+    $mail->SMTPSecure = $smtp['secure'] === 'ssl' ? PHPMailer::ENCRYPTION_SMTPS : PHPMailer::ENCRYPTION_STARTTLS;
+  }
+  $mail->Port       = $smtp['port'];
+  $mail->CharSet    = 'UTF-8';
+
+  return $mail;
 }
