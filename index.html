@@ -49,6 +49,11 @@
             <td><textarea id="your-message" name="メッセージ本文" cols="30" rows="6"></textarea></td>
           </tr>
         </table>
+        <!-- ボット対策の見えない入力欄 (人は入力しないので, 値があれば送信を破棄する. name は .env の HONEYPOT_FIELD と合わせる) -->
+        <div class="form__honeypot" aria-hidden="true">
+          <label for="your-website">この欄は空のままにしてください</label>
+          <input id="your-website" type="text" name="website_url" tabindex="-1" autocomplete="off" data-contact-honeypot>
+        </div>
         <input type="submit" value="確認">
       </form>
     </main>

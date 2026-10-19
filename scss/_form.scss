@@ -45,6 +45,8 @@
 
     td {
       text-align: left;
+      white-space: pre-wrap; // 本文の改行をそのまま表示する
+      overflow-wrap: anywhere;
     }
   }
 
@@ -59,9 +61,32 @@
 
   [type="submit"] {
     @include make-button-color-normal("primary");
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: wait;
+    }
   }
   
   [type="button"] {
     @include make-button-color-normal("secondary");
   }
+}
+
+// ボット対策の見えない入力欄 (人には表示しない)
+.form__honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+// 確認画面の送信エラーなどのメッセージ
+.confirm__message {
+  margin-block: 0 space("medium");
+  padding: space();
+  border-radius: space("x-small");
+  background-color: rgba(map-get($colors, "secondary"), 0.15);
+  white-space: pre-line;
 }

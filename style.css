@@ -524,6 +524,8 @@ button, input, select, textarea {
 }
 .confirm table td {
   text-align: left;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 .confirm [type=submit], .confirm [type=button] {
   display: inline-block;
@@ -557,6 +559,10 @@ button, input, select, textarea {
   background-color: var(--color--primary--active);
   color: var(--color--darkest);
 }
+.confirm [type=submit]:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
 .confirm [type=button], .confirm [type=button]:active {
   background-color: var(--color--secondary);
   color: var(--color--darkest);
@@ -564,4 +570,20 @@ button, input, select, textarea {
 .confirm [type=button]:hover, .confirm [type=button]:focus {
   background-color: var(--color--secondary--active);
   color: var(--color--lightest);
+}
+
+.form__honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.confirm__message {
+  margin-block: 0 var(--spacing--medium);
+  padding: var(--spacing--small);
+  border-radius: var(--spacing--x-small);
+  background-color: rgba(255, 192, 128, 0.15);
+  white-space: pre-line;
 }
