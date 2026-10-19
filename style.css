@@ -278,7 +278,6 @@ button, input, select, textarea {
   padding: var(--spacing--x-large) 0;
   background-color: var(--color--primary);
   color: var(--color--lightest);
-  text-align: center;
 }
 .footer a, .footer a:active {
   color: var(--color--lightest);
@@ -287,6 +286,9 @@ button, input, select, textarea {
 .footer a:hover, .footer a:focus {
   color: var(--color--lightest);
   text-decoration: underline;
+}
+.footer {
+  text-align: center;
 }
 .footer__inner {
   display: flex;
@@ -397,10 +399,6 @@ button, input, select, textarea {
 /**
  * Form
  */
-.form {
-  margin-block-end: var(--spacing--large);
-  text-align: center;
-}
 .form label {
   display: block;
 }
@@ -421,10 +419,12 @@ button, input, select, textarea {
 .form textarea {
   resize: vertical;
 }
+.form {
+  margin-block-end: var(--spacing--large);
+  text-align: center;
+}
 .form table {
   width: 100%;
-  margin-block-end: var(--spacing--large);
-  text-align: left;
 }
 @media (max-width: 599.9px) {
   .form table, .form table thead, .form table tbody, .form table tr, .form table th, .form table td {
@@ -446,6 +446,10 @@ button, input, select, textarea {
 .form table th, .form table td {
   padding: var(--spacing--small);
   border: 0;
+}
+.form table {
+  margin-block-end: var(--spacing--large);
+  text-align: left;
 }
 .form table th {
   width: 12rem;
@@ -490,7 +494,6 @@ button, input, select, textarea {
 
 .confirm table {
   width: 100%;
-  margin-block-end: var(--spacing--large);
 }
 @media (max-width: 599.9px) {
   .confirm table, .confirm table thead, .confirm table tbody, .confirm table tr, .confirm table th, .confirm table td {
@@ -513,11 +516,16 @@ button, input, select, textarea {
   padding: var(--spacing--small);
   border: 0;
 }
+.confirm table {
+  margin-block-end: var(--spacing--large);
+}
 .confirm table th {
   width: 12rem;
 }
 .confirm table td {
   text-align: left;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 .confirm [type=submit], .confirm [type=button] {
   display: inline-block;
@@ -551,6 +559,10 @@ button, input, select, textarea {
   background-color: var(--color--primary--active);
   color: var(--color--darkest);
 }
+.confirm [type=submit]:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
 .confirm [type=button], .confirm [type=button]:active {
   background-color: var(--color--secondary);
   color: var(--color--darkest);
@@ -558,4 +570,20 @@ button, input, select, textarea {
 .confirm [type=button]:hover, .confirm [type=button]:focus {
   background-color: var(--color--secondary--active);
   color: var(--color--lightest);
+}
+
+.form__honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.confirm__message {
+  margin-block: 0 var(--spacing--medium);
+  padding: var(--spacing--small);
+  border-radius: var(--spacing--x-small);
+  background-color: rgba(255, 191.25, 127.5, 0.15);
+  white-space: pre-line;
 }

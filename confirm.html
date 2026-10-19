@@ -20,9 +20,17 @@
   <body>
     <div id="confirm" class="confirm">
       <h1>内容確認</h1>
-      <table data-contact-confirm></table>
-      <input type="submit" value="送信する" data-contact-send>
-      <input type="button" value="前画面に戻る" data-contact-back>
+      <div data-contact-filled hidden>
+        <table data-contact-confirm></table>
+        <p class="confirm__message" data-contact-message role="alert" hidden></p>
+        <input type="submit" value="送信する" data-contact-send>
+        <input type="button" value="前画面に戻る" data-contact-back>
+      </div>
+      <div data-contact-empty hidden>
+        <p>入力内容が見つかりませんでした。お手数ですが、もう一度ご入力ください。</p>
+        <p><a href="./">入力画面へ</a></p>
+      </div>
+      <noscript><p>お問い合わせフォームのご利用には JavaScript を有効にしてください。</p></noscript>
     </div>
     <script src="init.js" type="module"></script>
   </body>
