@@ -1,0 +1,13 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# 行末の空白 2 つが改行の意味を持つ
+[*.md]
+trim_trailing_whitespace = false
