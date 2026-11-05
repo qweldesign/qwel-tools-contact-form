@@ -2,6 +2,8 @@
  * Utility - Text
  */
 
+@use "../variables" as *;
+
 $text-align-values: left, center, right, justify;
 
 .text {

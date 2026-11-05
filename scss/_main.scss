@@ -2,6 +2,8 @@
  * Layout - Main
  */
 
+@use "variables" as *;
+
 .main {
   &__container {
     @include container("md");

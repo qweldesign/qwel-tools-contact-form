@@ -2,9 +2,7 @@
  * Component - Fader
  */
 
-$gallery-image-count:      4 !default;
-$gallery-nav-color:        theme-color("lighter") !default;
-$gallery-nav-active-color: theme-color($theme-accent) !default;
+@use "variables" as *;
 
 .fader {
   position: fixed;

@@ -7,56 +7,43 @@
  * See LICENSE file for details.
  */
 
-// Customize
-@import "variables";
-
-// Settings
-@import "settings/colorSystem";
-@import "settings/gridSystem";
-@import "settings/typography";
-
-// Mixins
-@import "mixins/background";
-@import "mixins/button";
-@import "mixins/form";
-@import "mixins/table";
-@import "mixins/type";
+// 変数と mixin は, 各部品が _variables.scss から読み込む
 
 // Foundation
-@import "root";
-@import "normalize";
+@use "root";
+@use "normalize";
 
 // Layout
-@import "header";
-@import "gNav";
-@import "main";
-@import "footer";
+@use "header";
+@use "gNav";
+@use "main";
+@use "footer";
 
 // Components
-@import "icon";
-@import "button";
-@import "embed";
-@import "breadcrumb";
-@import "pagination";
-@import "backToTop";
-@import "drawerMenu";
-@import "fader";
-@import "modal";
-@import "slider";
+@use "icon";
+@use "button";
+@use "embed";
+@use "breadcrumb";
+@use "pagination";
+@use "backToTop";
+@use "drawerMenu";
+@use "fader";
+@use "modal";
+@use "slider";
 
 // Projects
-@import "hero";
-@import "section";
-@import "postItem";
-@import "postList";
-@import "form";
+@use "hero";
+@use "section";
+@use "postItem";
+@use "postList";
+@use "form";
 
 // Utility
-@import "utilities/scroll-offset";
-@import "utilities/scroll-inview";
-@import "utilities/safe-embed";
-//@import "utilities/flex";
-//@import "utilities/flexItem";
-@import "utilities/spacing";
-@import "utilities/text";
-@import "utilities/visibility";
+@use "utilities/scroll-offset";
+@use "utilities/scroll-inview";
+@use "utilities/safe-embed";
+//@use "utilities/flex";
+//@use "utilities/flexItem";
+@use "utilities/spacing";
+@use "utilities/text";
+@use "utilities/visibility";

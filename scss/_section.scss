@@ -2,6 +2,8 @@
  * Project - Section
  */
 
+@use "variables" as *;
+
 .section {
   &__inner {
     padding-block: space("large");

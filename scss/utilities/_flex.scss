@@ -2,6 +2,8 @@
  * Utility - Flex
  */
 
+@use "../variables" as *;
+
 $horizontal-align-values:  (
   center:  center, // 水平垂直共に適用される
   left:    flex-start,

@@ -1,5 +1,8 @@
 // Background
 
+@use "../settings" as *;
+@use "type" as *;
+
 @mixin background($key: $theme-accent) {
   background-color: theme-color($key);
   color: color-yiq($key);

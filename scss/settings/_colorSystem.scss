@@ -1,5 +1,9 @@
 // Color System
 
+@use "sass:color";
+@use "sass:map";
+@use "sass:math";
+
 // 配色を決定する
 
 $grays:            (
@@ -17,7 +21,7 @@ $colors:           (
   tertiary:            #99cc33  // hsl(80, 60%, 50%) oklch(78.2% 0.182 126.8)
 ) !default;
 
-$theme-colors:     map-merge($grays, $colors) !default;
+$theme-colors:     map.merge($grays, $colors) !default;
 $theme-accent:     "primary" !default;
 
 // 配色の配列から色指定を抽出する関数
@@ -32,11 +36,12 @@ $body-color:       theme-color("darkest") !default;
 // 背景色から適切な文字色を判定する関数 ($key で指定)
 // 参考(https://en.wikipedia.org/wiki/YIQ)
 @function get-color-yiq($key) {
-  $color: map-get($theme-colors, $key);
-  $r: red($color);
-  $g: green($color);
-  $b: blue($color);
-  $yiq: (($r * 299) + ($g * 587) + ($b * 114)) / 1000;
+  $color: map.get($theme-colors, $key);
+  // hsl() で書いた色でも判定が変わらないよう, 整数に丸める
+  $r: math.round(color.channel($color, "red", $space: rgb));
+  $g: math.round(color.channel($color, "green", $space: rgb));
+  $b: math.round(color.channel($color, "blue", $space: rgb));
+  $yiq: math.div(($r * 299) + ($g * 587) + ($b * 114), 1000);
   @if ($yiq < 150) {
     @return true;
   } @else {
@@ -62,13 +67,19 @@ $body-color:       theme-color("darkest") !default;
   }
 }
 
+// 明度を変える. color.adjust() は 0%〜100% の範囲で止まらないので, 範囲内に収める
+@function shift-lightness($color, $amount) {
+  $lightness: color.channel($color, "lightness", $space: hsl);
+  @return color.adjust($color, $lightness: math.clamp(-$lightness, $amount, 100% - $lightness), $space: hsl);
+}
+
 // テーマカラーにアクセントを付ける
 @function color-activate($key) {
-  $color: map-get($theme-colors, $key);
+  $color: map.get($theme-colors, $key);
   @if (get-color-yiq($key)) {
-    @return lighten($color, 20%);
+    @return shift-lightness($color, 20%);
   } @else {
-    @return darken($color, 20%);
+    @return shift-lightness($color, -20%);
   }
 }
 

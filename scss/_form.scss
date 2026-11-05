@@ -2,6 +2,9 @@
  * Project - Form
  */
 
+@use "sass:map";
+@use "variables" as *;
+
 .form {
   @include form();
   text-align: center;
@@ -18,7 +21,7 @@
     input, select, textarea {
       border: none;
       border-radius: space("x-small");
-      background-color: rgba(map-get($colors, $theme-accent), 0.05);
+      background-color: rgba(map.get($colors, $theme-accent), 0.05);
     }
   }
 

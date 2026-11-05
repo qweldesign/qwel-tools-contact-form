@@ -2,7 +2,7 @@
  * Layout - Header
  */
 
-$header-height:  4.5rem !default;
+@use "variables" as *;
 
 .header {
   position: fixed;

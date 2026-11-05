@@ -2,37 +2,7 @@
  * Component - Icon
  */
 
-$icon-bg:          theme-color($theme-accent) !default;
-$icon-color:       color-yiq($theme-accent) !default;
-$icon-hover-bg:    color-active($theme-accent) !default;
-$icon-hover-color: color-yiq($theme-accent, true) !default;
-$icon-size-sm:     1.5rem !default;
-$icon-size-md:     2.25rem !default;
-$icon-size-lg:     3rem !default;
-
-@mixin use-icon($bg: $icon-bg, $color: $icon-color, $hover-bg: $icon-hover-bg, $hover-color: $icon-hover-color, $rounded: 50%) {
-  & > .icon {
-    border-radius: $rounded;
-    background-color: $bg;
-    transition: background-color 0.25s ease;
-
-    & > .icon__span {
-      &, &::before, &::after {
-        border-color: $color;
-      }
-    }
-  }
-
-  &:hover > .icon {
-    background-color: $hover-bg;
-
-    & > .icon__span {
-      &, &::before, &::after {
-        border-color: $hover-color;
-      }
-    }
-  }
-}
+@use "variables" as *;
 
 .icon {
   position: relative;

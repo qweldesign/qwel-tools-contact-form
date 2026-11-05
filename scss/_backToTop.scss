@@ -2,12 +2,7 @@
  * Component - Back To Top
  */
 
-$back-to-top-bg:           $icon-bg !default;
-$back-to-top-color:        $icon-color !default;
-$back-to-top-hover-bg:     $icon-hover-bg !default;
-$back-to-top-hover-color:  $icon-hover-color !default;
-$back-to-top-pad:          space() !default;
-$back-to-top-height:       3rem !default;
+@use "variables" as *;
 
 .backToTop {
   @include use-icon($back-to-top-bg, $back-to-top-color, $back-to-top-hover-bg, $back-to-top-hover-color);

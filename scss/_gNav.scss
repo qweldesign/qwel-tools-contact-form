@@ -2,6 +2,8 @@
  * Layout - G Nav
  */
 
+@use "variables" as *;
+
 .gNav {
   @include row(space-between);
   height: 100%;

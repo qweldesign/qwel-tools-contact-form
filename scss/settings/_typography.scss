@@ -1,5 +1,8 @@
 // Typography
 
+@use "sass:math";
+@use "gridSystem" as *;
+
 // 固有のフォント設定
 $font-family-sans:       "\"Noto Sans JP\"", "\"游ゴシック\"", "\"Yu Gothic\"", sans-serif !default;
 $font-family-serif:      "\"Noto Serif JP\"", "\"游明朝\"", "\"Yu Mincho\"", serif !default;
@@ -26,7 +29,7 @@ $font-sizes:             (
 $body-typography:        (
   font-family:             $font-family-sans,
   font-weight:             $font-weight-sans,
-  line-height:             28.8 / ($font-size-base / ($font-size-base * 0 + 1)), // 単位除去
+  line-height:             math.div(28.8, math.div($font-size-base, $font-size-base * 0 + 1)), // 単位除去
   letter-spacing:          0
 ) !default;
 

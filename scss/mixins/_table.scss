@@ -1,5 +1,7 @@
 // Table
 
+@use "../settings" as *;
+
 @mixin make-table() {
   thead, tbody {
     width: 100%;

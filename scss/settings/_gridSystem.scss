@@ -1,5 +1,8 @@
 // Grid System
 
+@use "sass:map";
+@use "sass:math";
+
 // ルート要素にて定義
 // これを基準とした1rem を, 全ての寸法の基本単位とする
 $font-size-base:   16px !default;
@@ -9,7 +12,7 @@ $root-font-size:   min(3.84vw, $font-size-base) !default; // 4vw 以下推奨
 $grid-base:        6rem !default;
 
 // 画像アスペクト比 (幅/高さ)
-$img-aspect-ratio: 8 / 5 !default;
+$img-aspect-ratio: math.div(8, 5) !default;
 
 // 各BP別用途
 // xs: 1カラム (4グリッド: 24rem)
@@ -36,7 +39,7 @@ $breakpoints:      (
 
 // BPの配列の接頭辞から値を返す関数
 @function breakpoint($key: "lg") {
-  @return map-get($breakpoints, $key);
+  @return map.get($breakpoints, $key);
 }
 
 // コンテナ幅
@@ -54,11 +57,11 @@ $container-widths: (
 
 // ガター
 // 行を生成することで, コンテナの端とコンテンツ間が, それぞれ1.5rem 空く仕様
-$gutter:         $grid-base / 8 !default;
+$gutter:         math.div($grid-base, 8) !default;
 $container-pads: (
   sm:              $gutter,
-  md:              clamp(#{$gutter}, 2%, #{$grid-base / 6}),
-  lg:              clamp(#{$gutter}, 2%, #{$grid-base / 4})
+  md:              clamp(#{$gutter}, 2%, #{math.div($grid-base, 6)}),
+  lg:              clamp(#{$gutter}, 2%, #{math.div($grid-base, 4)})
 ) !default;
 
 // BPの配列の接頭辞からコンテナ内余白を返す関数
@@ -69,10 +72,10 @@ $container-pads: (
 // 余白定義
 $spacing-values:   (
   none:              0,
-  x-small:           $grid-base / 16,
-  small:             $grid-base / 8,
-  medium:            $grid-base / 4,
-  large:             $grid-base / 2,
+  x-small:           math.div($grid-base, 16),
+  small:             math.div($grid-base, 8),
+  medium:            math.div($grid-base, 4),
+  large:             math.div($grid-base, 2),
   x-large:           $grid-base
 ) !default;
 

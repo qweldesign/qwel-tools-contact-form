@@ -1,5 +1,7 @@
 // Type
 
+@use "../settings" as *;
+
 // ol, ul
 // Normalize では適用しない
 @mixin list-unstyled() {

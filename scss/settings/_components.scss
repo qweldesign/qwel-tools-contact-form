@@ -1,0 +1,75 @@
+// Components
+
+@use "sass:math";
+@use "colorSystem" as *;
+@use "gridSystem" as *;
+
+// 部品の変数. 部品のファイルはCSSを出すので, 読み込みの順序に影響しないようにここへ集める
+
+// Icon
+$icon-bg:          theme-color($theme-accent) !default;
+$icon-color:       color-yiq($theme-accent) !default;
+$icon-hover-bg:    color-active($theme-accent) !default;
+$icon-hover-color: color-yiq($theme-accent, true) !default;
+$icon-size-sm:     1.5rem !default;
+$icon-size-md:     2.25rem !default;
+$icon-size-lg:     3rem !default;
+
+// Button
+$button-width:             10.5rem !default; // 標準幅は2col 内に収まる
+$button-height:            3.5rem !default; // 標準高さは, 標準幅の3分の1とする
+$button-max-height:        4.5rem !default; // 最大高さを設ける
+$button-rounded:           space("x-small") !default;
+$button-gradient-enabled:  false !default;
+$button-transform-enabled: true !default;
+$button-transform:         scale(96%) !default;
+
+// Back To Top
+$back-to-top-bg:           $icon-bg !default;
+$back-to-top-color:        $icon-color !default;
+$back-to-top-hover-bg:     $icon-hover-bg !default;
+$back-to-top-hover-color:  $icon-hover-color !default;
+$back-to-top-pad:          space() !default;
+$back-to-top-height:       3rem !default;
+
+// Drawer Menu
+$drawer-always-shown:        false !default;
+$drawer-breakpoint:          breakpoint("md") !default;
+$drawer-pad:                 space() !default;
+$drawer-height:              3rem !default;
+$drawer-bg:                  $icon-bg !default;
+$drawer-color:               $icon-color !default;
+$drawer-hover-bg:            $icon-hover-bg !default;
+$drawer-hover-color:         $icon-hover-color !default;
+$drawer-navicon-bg:          $icon-bg !default;
+$drawer-navicon-color:       $icon-color !default;
+$drawer-navicon-hover-bg:    $icon-hover-bg !default;
+$drawer-navicon-hover-color: $icon-hover-color !default;
+$drawer-site-brand-width:    6rem !default;
+
+// Fader
+$gallery-image-count:      4 !default;
+$gallery-nav-color:        theme-color("lighter") !default;
+$gallery-nav-active-color: theme-color($theme-accent) !default;
+
+// Header
+$header-height:  4.5rem !default;
+
+// Modal
+$modal-ui-pad:         space() !default;
+$modal-ui-height:      3rem !default;
+$modal-ui-bg:          $icon-bg !default;
+$modal-ui-color:       $icon-color !default;
+$modal-ui-hover-bg:    $icon-hover-bg !default;
+$modal-ui-hover-color: $icon-hover-color !default;
+
+// Slider
+$slider-aspect-ratio:        math.div(8, 5) !default;
+$slider-break-point:         breakpoint("md") !default;
+$slider-height:              24rem !default;
+$slider-button-bg:           $icon-bg !default;
+$slider-button-color:        $icon-color !default;
+$slider-button-hover-bg:     $icon-hover-bg !default;
+$slider-button-hover-color:  $icon-hover-color !default;
+$slider-nav-color:           $link-color !default;
+$slider-nav-active-color:    $link-hover-color !default;

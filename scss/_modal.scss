@@ -2,12 +2,7 @@
  * Component - Modal
  */
 
-$modal-ui-pad:         space() !default;
-$modal-ui-height:      3rem !default;
-$modal-ui-bg:          $icon-bg !default;
-$modal-ui-color:       $icon-color !default;
-$modal-ui-hover-bg:    $icon-hover-bg !default;
-$modal-ui-hover-color: $icon-hover-color !default;
+@use "variables" as *;
 
 .modal {
   position: fixed;

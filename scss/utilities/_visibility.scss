@@ -2,6 +2,8 @@
  * Utility - Visibility
  */
 
+@use "../variables" as *;
+
 .visible {
   @each $key, $breakpoint in $breakpoints {
     &-#{$key} {

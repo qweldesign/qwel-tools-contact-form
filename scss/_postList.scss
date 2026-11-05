@@ -2,6 +2,8 @@
  * Project - Post List
  */
 
+@use "variables" as *;
+
 .postList {
   @include list-unstyled();
 

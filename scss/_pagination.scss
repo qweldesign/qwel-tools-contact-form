@@ -2,6 +2,8 @@
  * Component - Pagination
  */
 
+@use "variables" as *;
+
 .pagination {
   @include list-unstyled();
   @include row(center, center);

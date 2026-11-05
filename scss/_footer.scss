@@ -2,6 +2,8 @@
  * Layout - Footer
  */
 
+@use "variables" as *;
+
 .footer {
   @include background($theme-accent);
   padding: space("x-large");

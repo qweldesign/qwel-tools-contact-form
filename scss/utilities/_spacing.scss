@@ -2,6 +2,8 @@
  * Utility - Spacing
  */
 
+@use "../variables" as *;
+
 $spacing-props: (
   m:   "margin",
   mx:  "margin-inline",

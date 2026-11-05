@@ -1,0 +1,8 @@
+// Settings
+
+// CSSを出さない. 依存先を先に書く (順序を変えると with の上書きがエラーになる)
+
+@forward "colorSystem";
+@forward "gridSystem";
+@forward "typography";
+@forward "components";

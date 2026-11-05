@@ -1,1 +1,11 @@
 // Variables
+
+// 既定値を変えるときは, ここだけを書き換える. 存在しない変数を書くとエラーになる
+//
+// @forward "settings" with (
+//   $colors: (primary: #209fdf),
+//   $grid-base: 5rem
+// );
+
+@forward "settings";
+@forward "mixins";

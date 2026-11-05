@@ -2,19 +2,7 @@
  * Component - Drawer Menu
  */
 
-$drawer-always-shown:        false !default;
-$drawer-breakpoint:          breakpoint("md") !default;
-$drawer-pad:                 space() !default;
-$drawer-height:              3rem !default;
-$drawer-bg:                  $icon-bg !default;
-$drawer-color:               $icon-color !default;
-$drawer-hover-bg:            $icon-hover-bg !default;
-$drawer-hover-color:         $icon-hover-color !default;
-$drawer-navicon-bg:          $icon-bg !default;
-$drawer-navicon-color:       $icon-color !default;
-$drawer-navicon-hover-bg:    $icon-hover-bg !default;
-$drawer-navicon-hover-color: $icon-hover-color !default;
-$drawer-site-brand-width:    6rem !default;
+@use "variables" as *;
 
 .drawer {
   position: fixed;

@@ -1,5 +1,7 @@
 // Form
 
+@use "../settings" as *;
+
 @mixin form() {
   label {
     display: block;

@@ -2,6 +2,8 @@
  * Project - Hero
  */
 
+@use "variables" as *;
+
 .hero {
   @include row(center, center);
   position: relative;

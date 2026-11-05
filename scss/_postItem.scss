@@ -2,6 +2,8 @@
  * Project - Post Item
  */
 
+@use "variables" as *;
+
 .postItem {
   &__info {
     @include row(flex-start);

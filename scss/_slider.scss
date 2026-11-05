@@ -2,15 +2,7 @@
  * Component - Slider
  */
 
-$slider-aspect-ratio:        8 / 5 !default;
-$slider-break-point:         breakpoint("md") !default;
-$slider-height:              24rem !default;
-$slider-button-bg:           $icon-bg !default;
-$slider-button-color:        $icon-color !default;
-$slider-button-hover-bg:     $icon-hover-bg !default;
-$slider-button-hover-color:  $icon-hover-color !default;
-$slider-nav-color:           $link-color !default;
-$slider-nav-active-color:    $link-hover-color !default;
+@use "variables" as *;
 
 .slider {
   position: relative;
