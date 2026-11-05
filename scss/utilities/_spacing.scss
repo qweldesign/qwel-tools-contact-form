@@ -20,16 +20,20 @@ $spacing-props: (
 );
 
 @each $prefix, $prop in $spacing-props {
-  @each $key, $val in $spacing-values {
+  @each $key, $value in $spacing-values {
     .#{$prefix}-#{$key} {
-      #{$prop}: $val !important;
+      #{$prop}: $value !important;
     }
   }
+}
 
-  @each $key1, $breakpoint in $breakpoints {
-    @each $key2, $val in $spacing-values {
-      .#{$prefix}-#{$key1}-#{$key2} {
-        #{$prop}: $val !important;
+@each $key1, $breakpoint in $breakpoints {
+  @media (min-width: $breakpoint) {
+    @each $prefix, $prop in $spacing-props {
+      @each $key2, $value in $spacing-values {
+        .#{$prefix}-#{$key1}-#{$key2} {
+          #{$prop}: $value !important;
+        }
       }
     }
   }

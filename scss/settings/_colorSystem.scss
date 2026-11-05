@@ -12,9 +12,9 @@ $grays:            (
 ) !default;
 
 $colors:           (
-  primary:           hsl(203, 71%, 60%), // oklch(70% 0.12 240)
-  secondary:         hsl(32, 85%, 48%),  // oklch(70% 0.16 60)
-  tertiary:          hsl(70, 100%, 34%)  // oklch(70% 0.18 120)
+  primary:             #209fdf, // hsl(200, 75%, 50%) oklch(66.7% 0.139 237.8)
+  secondary:           #ffc080, // hsl(30, 100%, 75%) oklch(85.2% 0.108 65.9)
+  tertiary:            #99cc33  // hsl(80, 60%, 50%) oklch(78.2% 0.182 126.8)
 ) !default;
 
 $theme-colors:     map-merge($grays, $colors) !default;
@@ -25,11 +25,11 @@ $theme-accent:     "primary" !default;
   @return var(--color--#{$key});
 }
 
-// bodyの設定
+// body の設定
 $body-bg:          theme-color("lightest") !default;
 $body-color:       theme-color("darkest") !default;
 
-// 背景色から適切な文字色を判定する関数 ($keyで指定)
+// 背景色から適切な文字色を判定する関数 ($key で指定)
 // 参考(https://en.wikipedia.org/wiki/YIQ)
 @function get-color-yiq($key) {
   $color: map-get($theme-colors, $key);
@@ -78,6 +78,6 @@ $body-color:       theme-color("darkest") !default;
 }
 
 // リンク文字の設定
-// リンクを強調するため、_typography.scssにて、文字の装飾も設定すること
+// リンクを強調するため, _typography.scss にて, 文字の装飾も設定すること
 $link-color:       theme-color("darker") !default;
 $link-hover-color: theme-color($theme-accent) !default;

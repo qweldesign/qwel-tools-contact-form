@@ -5,8 +5,8 @@
     display: block;
 
     span.is-required {
-      color: theme-color("secondary");
       @include small-text();
+      color: theme-color("secondary");
     }
   }
 
@@ -17,7 +17,7 @@
   }
 
   input[type="file"] {
-    outline: 0;  
+    outline: 0;
   }
 
   textarea {

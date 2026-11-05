@@ -16,14 +16,14 @@ $slider-nav-active-color:    $link-hover-color !default;
   position: relative;
   width: 100%;
   height: calc(83.33vmin / #{$slider-aspect-ratio});
-  margin-block-start: 3rem; // .sliderNav に合わせて上下に余白を取る
   overflow: hidden;
+  margin-block-start: 3rem; // .sliderNav に合わせて上下に余白を取る
 
   @media (min-width: $slider-break-point) {
     height: $slider-height;
   }
-  
-  // gapはJSで指定
+
+  // gap はJSで指定
   &__inner {
     @include list-unstyled();
     display: flex;
@@ -35,14 +35,14 @@ $slider-nav-active-color:    $link-hover-color !default;
 
   &__item {
     position: relative;
-    flex: 0 1 auto; 
+    flex: 0 1 auto;
     order: 0;
     margin-inline: auto;
     opacity: 1;
     transition: opacity 0.15s linear;
-    
+
     &:not(.is-current) {
-      opacity: .5;
+      opacity: 0.5;
     }
 
     img {
@@ -64,7 +64,7 @@ $slider-nav-active-color:    $link-hover-color !default;
     right: 0;
     bottom: 0;
     padding: space() space("medium");
-    background: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.5));
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
     color: $body-bg;
     font-size: $h2-font-size;
     text-align: center;
@@ -76,6 +76,7 @@ $slider-nav-active-color:    $link-hover-color !default;
   }
 
   &__prev, &__next {
+    @include use-icon($slider-button-bg, $slider-button-color, $slider-button-hover-bg, $slider-button-hover-color, 50%);
     position: absolute;
     top: 0;
     bottom: 0;
@@ -84,8 +85,6 @@ $slider-nav-active-color:    $link-hover-color !default;
     margin: auto;
     border: 0;
     text-align: center;
-
-    @include use-icon($slider-button-bg, $slider-button-color, $slider-button-hover-bg, $slider-button-hover-color, 50%);
   }
 
   &__prev {
@@ -98,12 +97,12 @@ $slider-nav-active-color:    $link-hover-color !default;
 }
 
 .sliderNav {
-  list-style: none;
   display: flex;
   justify-content: center;
   height: 1.5rem;
   margin: space() auto;
   padding: 0;
+  list-style: none;
 
   &__item {
     width: 0.5rem;

@@ -14,7 +14,7 @@ $text-align-values: left, center, right, justify;
   @each $key, $breakpoint in $breakpoints {
     @media (min-width: $breakpoint) {
       @each $value in $text-align-values {
-        &-#{$value}-#{$key} {
+        &-#{$key}-#{$value} {
           text-align: $value !important;
         }
       }

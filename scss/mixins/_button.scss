@@ -1,14 +1,14 @@
 // Button
 
-$button-width:             10.5rem !default; // 標準幅は2col内に収まる
-$button-height:            3.5rem !default; // 標準高さは、標準幅の3分の1とする
+$button-width:             10.5rem !default; // 標準幅は2col 内に収まる
+$button-height:            3.5rem !default; // 標準高さは, 標準幅の3分の1とする
 $button-max-height:        4.5rem !default; // 最大高さを設ける
-$boutton-rounded:          space("x-small") !default;
+$button-rounded:           space("x-small") !default;
 $button-gradient-enabled:  false !default;
 $button-transform-enabled: true !default;
 $button-transform:         scale(96%) !default;
 
-// 幅と高さを指定して出力 (上下中央揃えの仕様上、テキストは1行まで)
+// 幅と高さを指定して出力 (上下中央揃えの仕様上, テキストは1行まで)
 @mixin make-block($width: $button-width, $height: $button-height) {
   display: block;
   width: $width;
@@ -22,7 +22,7 @@ $button-transform:         scale(96%) !default;
 }
 
 // ボタンの基本プロパティだけ出力 (インライン要素で作成したい場合等)
-@mixin make-button($rounded: $boutton-rounded) {
+@mixin make-button($rounded: $button-rounded) {
   &, &:active {
     border: 0;
     border-radius: $rounded;
@@ -32,11 +32,12 @@ $button-transform:         scale(96%) !default;
     outline: 0;
     user-select: none;
     cursor: pointer;
-    transition: all 0.5s ease;
+    transition: transform 0.5s ease, background-color 0.5s ease, background-position 0.5s ease, color 0.5s ease, box-shadow 0.5s ease, opacity 0.5s ease;
   }
 
   &:hover, &:focus {
     text-decoration: none;
+
     @if ($button-transform-enabled) {
       transform: $button-transform;
     }
@@ -50,6 +51,7 @@ $button-transform:         scale(96%) !default;
   } @else {
     @include make-button-color-normal($key);
   }
+
   @if ($button-transform-enabled) {
     &:hover, &:focus {
       box-shadow: 0 0 space() theme-color($key);
@@ -72,24 +74,24 @@ $button-transform:         scale(96%) !default;
 
 // グラデーション作成
 @mixin make-button-color-gradient($key: $theme-accent) {
-  $base:       map-get($theme-colors, $key);
-  $hightlight: lighten($base, 20%);
+  $base:      map-get($theme-colors, $key);
+  $highlight: lighten($base, 20%);
 
   &, &:active {
-    color: color-yiq($key);
-    background: linear-gradient(-30deg, $base, $hightlight, $base, $base);
-    background-position: 0% 0%;
+    background: linear-gradient(-30deg, $base, $highlight, $base, $base);
+    background-position: 0 0;
     background-size: 150% 100%;
+    color: color-yiq($key);
   }
 
   &:hover, &:focus {
+    background-position: 100% 0;
     color: color-yiq($key);
-    background-position: 100% 0%;
   }
 }
 
-@mixin button($key: $theme-accent, $width: $button-width, $height: $width / 3, $rounded: $boutton-rounded) {
-  $height: min($height, 4.5rem);
+@mixin button($key: $theme-accent, $width: $button-width, $height: $width / 3, $rounded: $button-rounded) {
+  $height: min($height, $button-max-height);
   @include make-block($width, $height);
   @include make-button($rounded);
   @include make-button-color($key);

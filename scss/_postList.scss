@@ -52,7 +52,7 @@
     .postList__item {
       margin-block-end: space("medium");
       padding-block-end: space("medium");
-      border-block-end: 1px solid theme-color('dark');
+      border-block-end: 1px solid theme-color("dark");
 
       &:last-child {
         border: 0;
@@ -63,12 +63,12 @@
       @include row(center);
 
       &__image {
-        @include col(3, ture);
+        @include col(3, true);
         margin: 0;
       }
 
       &__content {
-        @include col(6, ture);
+        @include col(6, true);
       }
 
       &__more {

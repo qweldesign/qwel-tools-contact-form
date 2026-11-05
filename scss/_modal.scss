@@ -7,7 +7,7 @@ $modal-ui-height:      3rem !default;
 $modal-ui-bg:          $icon-bg !default;
 $modal-ui-color:       $icon-color !default;
 $modal-ui-hover-bg:    $icon-hover-bg !default;
-$modal-ui-hover-color: $icon-hover-color !default;;
+$modal-ui-hover-color: $icon-hover-color !default;
 
 .modal {
   position: fixed;
@@ -59,14 +59,14 @@ $modal-ui-hover-color: $icon-hover-color !default;;
   }
 
   &__close, &__prev, &__next {
+    @include use-icon($modal-ui-bg, $modal-ui-color, $modal-ui-hover-bg, $modal-ui-hover-color, 0);
     position: absolute;
     z-index: 2010;
     width: $modal-ui-height;
     height: $modal-ui-height;
+    overflow: hidden;
     margin: auto;
     border-radius: 50%;
-    @include use-icon($modal-ui-bg, $modal-ui-color, $modal-ui-hover-bg, $modal-ui-hover-color, 0);
-    overflow: hidden;
     cursor: pointer;
   }
 

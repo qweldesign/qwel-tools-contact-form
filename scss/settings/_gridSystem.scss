@@ -1,9 +1,9 @@
 // Grid System
 
 // ルート要素にて定義
-// これを基準とした1remを、全ての寸法の基本単位とする
+// これを基準とした1rem を, 全ての寸法の基本単位とする
 $font-size-base:   16px !default;
-$root-font-size:   min(3.84vw, $font-size-base) !default; // 4vw以下推奨
+$root-font-size:   min(3.84vw, $font-size-base) !default; // 4vw 以下推奨
 
 // 基準幅
 $grid-base:        6rem !default;
@@ -13,23 +13,23 @@ $img-aspect-ratio: 8 / 5 !default;
 
 // 各BP別用途
 // xs: 1カラム (4グリッド: 24rem)
-// 文字サイズを流動させ、レイアウトを固定
+// 文字サイズを流動させ, レイアウトを固定
 //
 // sm: 1〜2カラム (6グリッド: 36rem)
-// コンテナ幅を拡げ、文字サイズをpxに切り替え固定
-// このサイズのデバイスは少ないため、ほとんどxsのレイアウトを継承する
-// WordPressブロックエディタの都合上、BPを600pxで設置するのが望ましい
+// コンテナ幅を拡げ, 文字サイズを px に切り替え固定
+// このサイズのデバイスは少ないため, ほとんど xs のレイアウトを継承する
+// WordPress ブロックエディタの都合上, BPを600px で設置するのが望ましい
 //
 // md: 1〜3カラム (9グリッド: 54rem)
 // 画像:文章を1:2の割合で表示するリストレイアウトが可能
 //
-// lg: 1～4カラム (12グリッド: 72rem)
+// lg: 1〜4カラム (12グリッド: 72rem)
 // 幅広コンテナ使用時に4カラムレイアウトが可能
-// "md"からflexItemを伸長させる使い方でもOK
+// "md"から flexItem を伸長させる使い方でもOK
 
 // ブレイクポイント (BP)
 $breakpoints:      (
-  sm:                $font-size-base * 37.5, // WordPressブロックエディタのBP (600px)
+  sm:                $font-size-base * 37.5, // WordPress ブロックエディタのBP (600px)
   md:                $font-size-base * 56.25,
   lg:                $font-size-base * 75
 ) !default;
@@ -40,7 +40,7 @@ $breakpoints:      (
 }
 
 // コンテナ幅
-// padding: clamp(12px, 2%, 24px)を左右に付与し、コンテナが収まる
+// padding: clamp(12px, 2%, 24px)を左右に付与し, コンテナが収まる
 $container-widths: (
   sm:                $grid-base * 6.25,  // 内寸 576px
   md:                $grid-base * 9.375, // 内寸 864px theme.json settings.layout.contentSize の値
@@ -53,7 +53,7 @@ $container-widths: (
 }
 
 // ガター
-// 行を生成することで、コンテナの端とコンテンツ間が、それぞれ1.5rem空く仕様
+// 行を生成することで, コンテナの端とコンテンツ間が, それぞれ1.5rem 空く仕様
 $gutter:         $grid-base / 8 !default;
 $container-pads: (
   sm:              $gutter,
@@ -88,16 +88,17 @@ $spacing-values:   (
 }
 
 @mixin container($key: "lg", $max-width: container-width($key)) {
-  width: min(100%, #{$max-width});
   @include make-container($key);
+  width: min(100%, #{$max-width});
 }
 
 // 行生成
 @mixin row($horizontal-align: space-around, $vertical-align: center, $has-gutter: false) {
   display: flex;
   flex-flow: row wrap;
-  justify-content: $horizontal-align;
   align-items: $vertical-align;
+  justify-content: $horizontal-align;
+
   // デフォルトではガター無し
   @if $has-gutter == true {
     margin-inline: calc(#{container-pad("sm")} * -1);
@@ -112,6 +113,7 @@ $spacing-values:   (
     } @else {
       flex-grow: $size;
     }
+
     flex-shrink: $size;
     flex-basis: $size * $grid-base;
   } @else {
@@ -121,10 +123,12 @@ $spacing-values:   (
       } @else {
         flex-grow: $size;
       }
+
       flex-shrink: $size;
       flex-basis: $size * $grid-base;
     }
   }
+
   width: 100%;
   padding-inline: container-pad("sm");
 }

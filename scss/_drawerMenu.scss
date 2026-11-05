@@ -38,14 +38,14 @@ $drawer-site-brand-width:    6rem !default;
   }
 
   &__navicon {
+    @include use-icon($drawer-navicon-bg, $drawer-navicon-color, $drawer-navicon-hover-bg, $drawer-navicon-hover-color, 0);
     position: absolute;
     top: 0;
     right: 0;
     z-index: 1111;
-    @include use-icon($drawer-navicon-bg, $drawer-navicon-color, $drawer-navicon-hover-bg, $drawer-navicon-hover-color, 0);
     opacity: 0;
     transform: rotateY(-180deg);
-    transition: all 0.5s ease;
+    transition: opacity 0.5s ease, transform 0.5s ease;
 
     .drawer:not(.is-active):not(.is-ready) & {
       opacity: 1;
@@ -54,14 +54,14 @@ $drawer-site-brand-width:    6rem !default;
   }
 
   &__close {
+    @include use-icon($drawer-navicon-bg, $drawer-navicon-color, $drawer-navicon-hover-bg, $drawer-navicon-hover-color, 0);
     position: absolute;
     top: 0;
     right: 0;
     z-index: 1110;
-    @include use-icon($drawer-navicon-bg, $drawer-navicon-color, $drawer-navicon-hover-bg, $drawer-navicon-hover-color, 0);
     opacity: 1;
     transform: rotateY(0);
-    transition: all 0.5s ease;
+    transition: opacity 0.5s ease, transform 0.5s ease;
 
     .drawer:not(.is-active) & {
       opacity: 0;
@@ -82,11 +82,11 @@ $drawer-site-brand-width:    6rem !default;
   background-color: $drawer-bg;
   text-align: center;
   transition: width 0.5s ease;
-  
+
   &.is-hidden {
     width: 0;
   }
-  
+
   &__inner {
     display: flex;
     flex-wrap: wrap;
@@ -96,7 +96,7 @@ $drawer-site-brand-width:    6rem !default;
     padding-inline-start: 0;
     text-align: left;
     opacity: 1;
-    
+
     &.is-hidden {
       opacity: 0;
     }
@@ -108,15 +108,15 @@ $drawer-site-brand-width:    6rem !default;
 
   &__primaryMenu,
   &__socialMenu {
-    list-style: none;
     flex: 1 1 100%;
     padding-inline-start: 0;
+    list-style: none;
   }
 
   &__socialMenu {
     display: flex;
-    justify-content: flex-start;
     align-items: center;
+    justify-content: flex-start;
     padding-inline-start: 20%;
   }
 
@@ -132,7 +132,7 @@ $drawer-site-brand-width:    6rem !default;
       color: $drawer-color;
       fill: $drawer-color;
       text-decoration: none;
-      transition: all 0.25s ease;
+      transition: background-color 0.25s ease, color 0.25s ease, fill 0.25s ease;
     }
 
     &:not(.is-siteBrand) a:hover {
@@ -160,8 +160,8 @@ $drawer-site-brand-width:    6rem !default;
 
       a {
         display: inline-flex;
-        justify-content: center;
         align-items: center;
+        justify-content: center;
         width: 3rem;
         height: 3rem;
         padding: 0;

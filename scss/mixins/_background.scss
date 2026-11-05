@@ -5,6 +5,6 @@
   color: color-yiq($key);
 
   a {
-    @include link-text(color-yiq($key), color-yiq($key))
+    @include link-text(color-yiq($key), color-yiq($key));
   }
 }

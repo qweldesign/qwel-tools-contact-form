@@ -10,6 +10,7 @@ $back-to-top-pad:          space() !default;
 $back-to-top-height:       3rem !default;
 
 .backToTop {
+  @include use-icon($back-to-top-bg, $back-to-top-color, $back-to-top-hover-bg, $back-to-top-hover-color);
   position: fixed;
   right: $back-to-top-pad;
   bottom: $back-to-top-pad;
@@ -18,20 +19,20 @@ $back-to-top-height:       3rem !default;
   width: $back-to-top-height;
   height: $back-to-top-height;
   padding: 0; // Reset
-  opacity: 0;
-  transform: translateY(1rem) rotateY(-180deg);
-  transition: all 0.5s ease;
+  border: 0; // Reset (button 要素)
+  background-color: transparent; // Reset (button 要素)
   text-align: center;
   outline: 0;
   cursor: default;
   pointer-events: none;
+  opacity: 0;
+  transform: translateY(1rem) rotateY(-180deg);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 
   &.is-active {
-    opacity: 1;
-    transform: translateY(0) rotateY(0);
     cursor: pointer;
     pointer-events: auto;
+    opacity: 1;
+    transform: translateY(0) rotateY(0);
   }
-
-  @include use-icon($back-to-top-bg, $back-to-top-color, $back-to-top-hover-bg, $back-to-top-hover-color);
 }

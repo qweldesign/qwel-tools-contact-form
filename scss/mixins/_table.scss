@@ -24,6 +24,7 @@
 }
 
 @mixin table() {
+  @include make-table();
   width: 100%;
 
   @media (max-width: breakpoint("sm") - 0.1px) {
@@ -31,11 +32,10 @@
       display: block;
     }
   }
-
-  @include make-table();
 }
 
 @mixin fluid-table($width: 72rem) {
+  @include make-table();
   width: 100%;
   overflow-x: auto;
 
@@ -43,6 +43,4 @@
     width: $width;
     margin: 0 auto;
   }
-
-  @include make-table();
 }

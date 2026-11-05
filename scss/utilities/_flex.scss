@@ -38,19 +38,19 @@ $vertical-align-values:    (
   @each $key1, $breakpoint in $breakpoints {
     @media (min-width: $breakpoint) {
       @each $key2, $value in $horizontal-align-values {
-        &-#{$key2}-#{$key1} {
+        &-#{$key1}-#{$key2} {
           justify-content: $value !important;
         }
       }
 
       @each $key2, $value in $vertical-align-values {
-        &-#{$key2}-#{$key1} {
+        &-#{$key1}-#{$key2} {
           align-items: $value !important;
         }
       }
 
       @each $key2, $value in $spacing-values {
-        &-gap-#{$key2}-#{$key1} {
+        &-gap-#{$key1}-#{$key2} {
           gap: $value !important;
         }
       }

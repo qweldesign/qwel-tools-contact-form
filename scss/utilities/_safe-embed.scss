@@ -7,10 +7,10 @@
   top: 0;
   left: 0;
   display: flex;
-  width: 100%;
-  height: 100%;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  height: 100%;
   background: rgba(map-get($theme-colors, "darkest"), 0.3);
   color: $body-bg;
   transition: opacity 0.25s linear;
@@ -21,5 +21,6 @@
 
   p {
     font-size: font-size("small");
+    text-align: center;
   }
 }

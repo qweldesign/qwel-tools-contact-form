@@ -1,6 +1,6 @@
 ## QWEL STARTER TEMPLATE
 
-[QWEL.DESIGN](https://qwel.design) のweb開発のためのスターターキット
+[QWEL.DESIGN](https://qwel.design) のWeb開発のためのスターターキット
 
 ---
 

@@ -14,10 +14,10 @@ html {
 }
 
 body {
+  @include body();
   margin: 0; // Remove the margin in all browsers
   background-color: $body-bg;
   color: $body-color;
-  @include body();
   -webkit-text-size-adjust: 100%; // Prevent adjustments of font size after orientation changes in iOS
 }
 
@@ -95,5 +95,5 @@ th {
 }
 
 button, input, select, textarea {
-  font: inherit;  // Change the font styles in all browsers
+  font: inherit; // Change the font styles in all browsers
 }

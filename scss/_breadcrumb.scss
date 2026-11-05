@@ -3,10 +3,10 @@
  */
 
 .breadcrumb {
-  list-style: none;
   display: flex;
   flex-flow: row wrap;
   padding: 0;
+  list-style: none;
 
   &__item {
     flex: 0 0 auto;
@@ -19,13 +19,13 @@
 
     a, span {
       display: inline-block;
+      padding: 0 0.2em;
+      border-radius: 0.2em;
+      background-color: rgba(map-get($theme-colors, "secondary"), 0.15);
+      color: theme-color("darker");
       font-weight: 600;
       font-style: normal;
       font-size: 0.875rem;
-      color: theme-color("darker");
-      background-color: rgba(map-get($theme-colors, "secondary"), 0.15);
-      padding: 0 0.2em;
-      border-radius: 0.2em;
     }
 
     span {

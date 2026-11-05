@@ -5,7 +5,7 @@
 .postItem {
   &__info {
     @include row(flex-start);
-    font-size: font-size("small")
+    font-size: font-size("small");
   }
 
   &__date {

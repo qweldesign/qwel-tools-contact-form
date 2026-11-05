@@ -7,17 +7,17 @@
 
 /**
  * スライドアニメーションで遷移するギャラリー
- * ドラグ, ホイール操作対応
- * 
+ * ドラッグ, ホイール操作対応
+ *
  * 使い方:
- * _slider.scss をバンドルした css を読み込み,
+ * _slider.scss をバンドルしたcssを読み込み,
  * 画面幅100%の要素内にギャラリーを配置する
- * ギャラリー本体 (div等) に [data-gallery="slider"] 属性を付与し,
- * ギャラリーインナーに (ul等) [data-gallery-main] 属性を付与し,
- * ギャラリーアイテムに (li等) [data-gallery-item] 属性を付与する
- * 
- * オプション (data属性で指定):
- * data-flickable: ドラグ、ホイール操作に対応 (規定でOFF, ONにする場合値は不要)
+ * ギャラリー本体 (div 等) に [data-gallery="slider"] 属性を付与し,
+ * ギャラリーインナーに (ul 等) [data-gallery-main] 属性を付与し,
+ * ギャラリーアイテムに (li 等) [data-gallery-item] 属性を付与する
+ *
+ * オプション (data 属性で指定):
+ * data-flickable: ドラッグ, ホイール操作に対応 (既定でOFF, ONにする場合値は不要)
  * data-aspect-ratio: アスペクト比 (SCSSも修正が必要)
  * data-gap: アイテム間隔(px) SCSSで指定不可
  * data-interval: アニメーション時間間隔
@@ -26,29 +26,30 @@
 export default class Slider {
   constructor(elem) {
     // 要素
-    this.elem = elem || document.querySelector('[data-gallery="slider"]');
+    this.elem = elem ?? document.querySelector('[data-gallery="slider"]');
     if (!this.elem) return;
     this.inner = this.elem.querySelector('[data-gallery-main]');
     if (!this.inner) return;
     this.items = Array.from(this.elem.querySelectorAll('[data-gallery-item]'));
     if (!this.items.length) return;
 
-    // オプションをdata属性から取得
-    this.flickable = this.elem.hasAttribute('data-flickable') || false;
+    // オプションを data 属性から取得
+    this.flickable = this.elem.hasAttribute('data-flickable');
     this.aspectRatio = Number(this.elem.dataset.aspectRatio) || 8 / 5;
-    this.gap = Number(this.elem.dataset.gap) || 96;
+    // Number(undefined) は NaN になり ?? では既定値に落ちないため, 変換前に既定値を当てる
+    this.gap = Number(this.elem.dataset.gap ?? 96);
     this.interval = Number(this.elem.dataset.interval) || 3000; // 1000未満を指定すると自動再生しない
     this.duration = Number(this.elem.dataset.duration) || 500;
 
-    // innerにスタイル適用
-    this.inner.style.flexWrap = 'nowrap'; // .wp-block-gallery を Reset (WordPress対応)
+    // inner にスタイル適用
+    this.inner.style.flexWrap = 'nowrap'; // .wp-block-gallery を Reset (WordPress 対応)
     this.inner.style.gap = `${this.gap}px`;
 
     // 状態管理
     this.currentIndex = 0;
     this.itemsCount = this.items.length;
-    this.distance = 0; // インラインでtranslateXに適用する値
-    this.dragDistance = []; // ドラグ操作の軌跡を保持
+    this.distance = 0; // インラインで translateX に適用する値
+    this.dragDistance = []; // ドラッグ操作の軌跡を保持
     this.isAnimated = false;
 
     // 各種セットアップ
@@ -77,7 +78,7 @@ export default class Slider {
     this.isPlay = false;
   }
 
-  // sizeを指定して、スライダーを動かす
+  // size を指定して, スライダーを動かす
   move(size, duration = this.duration) {
     // 予め引っ張られてくるアイテムを移動しておく
     this.readyMove(size);
@@ -177,7 +178,7 @@ export default class Slider {
     for (let i = 0; i < this.itemsCount; i++) {
       const li = document.createElement('li');
       li.classList.add('sliderNav__item');
-      li.dataset.targetIndex = i; // data-target-indexを挿入
+      li.dataset.targetIndex = i; // data-target-index を挿入
       this.nav.appendChild(li);
     }
 
@@ -215,7 +216,9 @@ export default class Slider {
   handleEvents() {
     // タッチデバイスの判定
     const touchSupported = 'ontouchstart' in document.documentElement || navigator.maxTouchPoints > 0;
-    const myTouch = touchSupported ? 'touchend' : 'click';
+    // タップでも click は発火するため, ボタン類は常に click で扱う
+    // (touchend にすると, タッチ対応PCでマウス操作した際に反応しない)
+    const myTouch = 'click';
 
     // 状態
     this.x = 0;
@@ -223,7 +226,7 @@ export default class Slider {
     this.isDragging = false;
     this.delta = 0;
 
-    // ドラグおよびホイール操作
+    // ドラッグおよびホイール操作
     if (this.flickable) {
       if (touchSupported) {
         this.inner.addEventListener('touchstart', (event) => {
@@ -244,7 +247,7 @@ export default class Slider {
           this.isDragging = false;
         });
 
-        // touchcancelは、touchEnd扱い
+        // touchcancel は, touchEnd 扱い
         this.inner.addEventListener('touchcancel', () => {
           this.touchEndHandler();
           this.isDragging = false;
@@ -271,7 +274,7 @@ export default class Slider {
         this.isDragging = false;
       });
 
-      // ポインターが外れたときは、touchEnd扱い
+      // ポインターが外れたときは, touchEnd 扱い
       this.inner.addEventListener('mouseleave', () => {
         this.touchEndHandler();
         this.isDragging = false;
@@ -285,7 +288,7 @@ export default class Slider {
       });
     }
 
-    // img > a リンク無効化 (WordPress対応)
+    // img > a リンク無効化 (WordPress 対応)
     this.inner.querySelectorAll('.post__image > a').forEach((elem) => {
       elem.addEventListener(myTouch, (event) => {
         event.preventDefault();
@@ -295,7 +298,7 @@ export default class Slider {
     // ナビゲーション操作
     this.nav.addEventListener(myTouch, (event) => {
       const target = event.target;
-      if (target.dataset.targetIndex) {
+      if (target.dataset.targetIndex && !this.isAnimated) {
         this.move(target.dataset.targetIndex - this.currentIndex % this.itemsCount);
         this.stopInterval();
       }
@@ -330,7 +333,7 @@ export default class Slider {
 
   touchMoveHandler() {
     if (this.isDragging && !this.isAnimated) {
-      // 配列にx座標をpushする
+      // 配列に x 座標を push する
       this.dragDistance.push(this.x);
       const len = this.dragDistance.length;
       let distance = 0;
@@ -350,10 +353,10 @@ export default class Slider {
     if (this.isDragging) {
       // 移動距離
       const distance = this.dragDistance[0] - this.dragDistance[this.dragDistance.length - 1];
-      if (Math.abs(distance) > 10) { // 僅かな移動距離で、move()を頻発させない
+      if (Math.abs(distance) > 10) { // 僅かな移動距離で, move()を頻発させない
         const len = this.items.length;
         let size = 0;
-        // 移動距離とアイテムの幅から、どれだけmove()させるか計測
+        // 移動距離とアイテムの幅から, どれだけ move()させるか計測
         if (distance < 0) {
           const w1 = this.items[(this.currentIndex - 3 + len) % len].clientWidth;
           const w2 = this.items[(this.currentIndex - 2 + len) % len].clientWidth;
@@ -365,7 +368,10 @@ export default class Slider {
           if (w1 / 3 < Math.abs(distance)) size++;
           if ((w1 * 2 + w2) / 3 < Math.abs(distance)) size++;
         }
-        this.move(size, this.duration / 2); // 既に引っ張ってきているので、半分の時間
+        this.move(size, this.duration / 2); // 既に引っ張ってきているので, 半分の時間
+      } else {
+        // 僅かな移動距離の場合は元の位置に戻す
+        this.windowResizeHandler();
       }
     }
   }
@@ -394,7 +400,7 @@ export default class Slider {
     let result = window.innerWidth / 2;
     result -= this.items[index % len].clientWidth / 2;
     for (let i = 0; i > -3; i--) {
-      let j = (index + i - 1 + len) % len;
+      const j = (index + i - 1 + len) % len;
       result -= this.items[j].clientWidth;
       result -= this.gap;
     }
@@ -415,7 +421,6 @@ export default class Slider {
       : this.moved();
   }
 
-
   moved() {
     this.inner.style.transform = `translateX(${this.start + this.flickDistance}px)`;
     this.timeStart = false;
@@ -423,7 +428,6 @@ export default class Slider {
     this.setActiveTarget();
     this.windowResizeHandler();
   }
-
 
   easing(t, b, c, d) {
     t /= d / 2;

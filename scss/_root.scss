@@ -1,5 +1,5 @@
 /**
- * Root
+ * Foundation - Root
  */
 
 :root {
@@ -27,7 +27,7 @@
   @each $key, $value in $heading-typography {
     --heading-#{$key}: #{$value};
   }
-  
+
   @each $key, $size in $font-sizes {
     --font-size--#{$key}: #{$size};
   }

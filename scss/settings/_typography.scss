@@ -17,7 +17,7 @@ $font-sizes:             (
   xx-large:                2rem,     // 16/8
 ) !default;
 
-// 文字サイズの配列からサイズを抽出する関数 ($keyで指定)
+// 文字サイズの配列からサイズを抽出する関数 ($key で指定)
 @function font-size($key: "normal") {
   @return var(--font-size--#{$key});
 }

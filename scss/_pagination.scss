@@ -17,7 +17,7 @@
 
     & > span {
       @include make-block(2rem, 3rem);
-      border-radius: $boutton-rounded;
+      border-radius: $button-rounded;
       background-color: color-active($theme-accent);
       color: color-yiq($theme-accent, true);
       text-align: center;

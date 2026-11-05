@@ -1,10 +1,10 @@
 // Type
 
 // ol, ul
-// Normalizeでは適用しない
+// Normalize では適用しない
 @mixin list-unstyled() {
-  list-style: none;
   padding-inline-start: 0;
+  list-style: none;
 }
 
 // blockquote
@@ -14,20 +14,20 @@
   border-inline-start: space("x-small") solid $body-color;
 
   p, cite {
-    font-style: italic;
     @include small-text();
+    font-style: italic;
   }
 }
 
 // リンク文字列
-@mixin link-text($color: $link-color, $hover-color: $link-hover-color, $decoration: $link-decoration, $hoverDecoration: $link-hover-decoration) {
+@mixin link-text($color: $link-color, $hover-color: $link-hover-color, $decoration: $link-decoration, $hover-decoration: $link-hover-decoration) {
   &, &:active {
     color: $color;
     text-decoration: $decoration;
   }
-  
+
   &:hover, &:focus {
     color: $hover-color;
-    text-decoration: $hoverDecoration;
+    text-decoration: $hover-decoration;
   }
 }

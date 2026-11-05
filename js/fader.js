@@ -7,25 +7,25 @@
 
 /**
  * フェードアニメーションで遷移するギャラリー
- * 
+ *
  * 使い方:
- * _fader.scss をバンドルした css を読み込み,
+ * _fader.scss をバンドルしたcssを読み込み,
  * ギャラリー本体に [data-gallery="fader"] 属性を付与し,
  * ギャラリーアイテムに [data-gallery-item] 属性を付与する
- * 
+ *
  * オプション:
- * data-interval: アニメーション時間間隔 (data属性で指定)
+ * data-interval: アニメーション時間間隔 (data 属性で指定)
  */
 export default class Fader {
   constructor(elem) {
     // 要素
-    this.elem = elem || document.querySelector('[data-gallery="fader"]');
+    this.elem = elem ?? document.querySelector('[data-gallery="fader"]');
     if (!this.elem) return;
     this.items = Array.from(this.elem.querySelectorAll('[data-gallery-item]'));
     if (!this.items.length) return;
 
-    // オプションをdata属性から取得
-    this.interval = this.elem.dataset.interval || 5000;
+    // オプションを data 属性から取得
+    this.interval = Number(this.elem.dataset.interval) || 5000;
 
     // 状態管理
     this.currentIndex = 0;
@@ -60,12 +60,11 @@ export default class Fader {
     for (let i = 0; i < this.itemsCount; i++) {
       const li = document.createElement('li');
       li.classList.add('faderNav__item');
-      li.dataset.targetIndex = i; // data-target-indexを挿入
+      li.dataset.targetIndex = i; // data-target-index を挿入
       this.nav.appendChild(li);
     }
 
-    // 現アイテムに.is-currrentを付与
-    this.navItems = this.nav.children;
+    // 現アイテムに .is-current を付与
     this.navItems = this.nav.children;
     this.navItems[this.currentIndex].classList.add('is-current');
 
@@ -85,7 +84,7 @@ export default class Fader {
       }
     });
   }
-  
+
   update(index) {
     this.currentIndex = index % this.itemsCount;
     this.fade(this.currentIndex);

@@ -14,11 +14,11 @@
   &.is-sm {
     @include make-block(10.5rem);
   }
-  
+
   &.is-md {
     @include make-block(16.5rem, 4.5rem);
   }
-  
+
   &.is-lg {
     @include make-block(22.5rem, 4.5rem);
   }

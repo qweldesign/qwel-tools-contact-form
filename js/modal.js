@@ -8,28 +8,28 @@
 /**
  * モーダルウィンドウとして機能するギャラリー
  * ハッシュ(#)による履歴保持対応
- * 
+ *
  * 使い方:
- * _modal.scss をバンドルした css を読み込み,
+ * _modal.scss をバンドルしたcssを読み込み,
  * ギャラリー (画像リストを含むラッパー要素) に [data-gallery="modal"] 属性を付与し,
- * 画像を開くリンクには [data-gallery-src="[imagepath]"] 属性を付与する 
- * 
+ * 画像を開くリンクには href 属性と [data-gallery-src="[imagepath]"] 属性を付与する
+ *
  * オプション:
  * breakpoint: 指定のBP未満のビューポートでは発火しない
- * syncWithHistory: hashを使用して履歴を残す (規定でON)
+ * syncWithHistory: hash を使用して履歴を残す (既定でON)
  */
 
 export default class Modal {
   constructor(elem, options = {}) {
     // 指定のBP未満のビューポートでは発火しない
-    const breakpoint = options.breakpoint || 600;
+    const breakpoint = options.breakpoint ?? 600;
     if (window.innerWidth < breakpoint) return;
 
-    // hashを使用して履歴を残す (規定でON)
+    // hash を使用して履歴を残す (既定でON)
     const syncWithHistory = options.syncWithHistory ?? true;
 
     // 要素
-    this.elem = elem || document.querySelector('[data-gallery="modal"]');
+    this.elem = elem ?? document.querySelector('[data-gallery="modal"]');
     if (!this.elem) return;
     this.links = Array.from(this.elem.querySelectorAll('[data-gallery-src]'));
     if (!this.links.length) return;
@@ -38,7 +38,7 @@ export default class Modal {
     this.isShown = false;
     this.index = 0;
     if (syncWithHistory) {
-      // hash と data属性の値のセットをマップとして保持
+      // hash と data 属性の値のセットをマップとして保持
       this.map = [];
       this.links.forEach((elem, order) => {
         const hash = elem.getAttribute('href').slice(1);
@@ -58,7 +58,7 @@ export default class Modal {
   }
 
   createModal() {
-    // .modal: body末尾に挿入されるラッパー要素
+    // .modal: body 末尾に挿入されるラッパー要素
     this.modal = document.createElement('div');
     this.modal.classList.add('modal', 'is-hidden'); // opacity: 0
     this.modal.setAttribute('aria-hidden', 'true'); // visibility: hidden
@@ -113,7 +113,7 @@ export default class Modal {
     this.modal.appendChild(this.next);
   }
 
-  // hashを使用して履歴を残す場合は, 各メソッドに pushState を追加
+  // hash を使用して履歴を残す場合は, 各メソッドに pushState を追加
   handleEvents(withSync) {
     // 開く
     this.links.forEach((item, i) => {
@@ -152,7 +152,7 @@ export default class Modal {
       // モーダルを開く
       this.modal.classList.remove('is-hidden');
       this.modal.setAttribute('aria-hidden', 'false');
-      this.shown = true;
+      this.isShown = true;
     }
 
     // 画像切り替え
@@ -172,36 +172,44 @@ export default class Modal {
 
   hide(withSync) {
     if (withSync) {
-      history.pushState(null, '', location.pathname);
+      history.pushState(null, '', location.pathname + location.search);
     }
     this.transitionEnd(this.modal, () => {
       this.modal.classList.add('is-hidden');
     }).then(() => {
       this.modal.setAttribute('aria-hidden', 'true');
     });
-    this.shown = false;
+    this.isShown = false;
   }
 
   hashChangeHandler() {
     const hash = location.hash.slice(1);
     const index = this.map.findIndex(item => item.hash === hash);
     if (!hash || index === -1) {
-      // hash が空 もしくは map に存在しない場合 (Modalと無関係のAnchorに移動する場合)
-      if (this.shown) this.hide(false);
+      // hash が空 もしくは map に存在しない場合 (Modal と無関係の Anchor に移動する場合)
+      if (this.isShown) this.hide(false);
     } else {
       this.change(index, false);
     }
   }
 
-  transitionEnd(elem, func) {
+  transitionEnd(elem, func, timeout = 1000) {
     // CSS遷移の完了を監視
+    // 遷移が発生しない場合でも timeout 後に必ず resolve する
     let callback;
+    let timer;
     const promise = new Promise((resolve) => {
-      callback = () => resolve(elem);
+      callback = (event) => {
+        // 子要素 (.modal__image 等) からバブリングしてきた transitionend は無視
+        if (event && event.target !== elem) return;
+        resolve(elem);
+      };
       elem.addEventListener('transitionend', callback);
+      timer = setTimeout(callback, timeout);
     });
     func();
-    promise.then((elem) => {
+    promise.then(() => {
+      clearTimeout(timer);
       elem.removeEventListener('transitionend', callback);
     });
     return promise;
