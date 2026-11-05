@@ -5,7 +5,29 @@
 @use "variables" as *;
 
 .footer {
-  @include background($theme-accent);
-  padding: space("x-large");
+  @include background("primary");
+  padding: space("x-large") 0;
   text-align: center;
+
+  &__inner {
+    @include row(center);
+    @include container();
+    gap: space("large");
+  }
+
+  &__item {
+    @include small-text();
+    display: inline-flex;
+    align-items: center;
+
+    .icon {
+      margin-inline-end: space("x-small");
+    }
+  }
+
+  small {
+    font-size: 0.875rem;
+    line-height: 1.8;
+    letter-spacing: 0.02em;
+  }
 }

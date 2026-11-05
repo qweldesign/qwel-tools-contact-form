@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>確認画面 | QWEL in Action</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Noto+Sans:wght@100..900&family=Noto+Serif:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="/assets/favicon.ico" sizes="32x32">
+    <link rel="icon" href="/assets/logo_static.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <style>
+      #confirm {
+        width: min(100%, 768px);
+        margin: 0 auto;
+        padding: 0 clamp(0.75rem, 3.125%, 1.5rem);
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="confirm" class="confirm">
+      <h1>内容確認</h1>
+      <div data-contact-filled hidden>
+        <table data-contact-confirm></table>
+        <p class="confirm__message" data-contact-message role="alert" hidden></p>
+        <input type="submit" value="送信する" data-contact-send>
+        <input type="button" value="前画面に戻る" data-contact-back>
+      </div>
+      <div data-contact-empty hidden>
+        <p>入力内容が見つかりませんでした。お手数ですが、もう一度ご入力ください。</p>
+        <p><a href="./">入力画面へ</a></p>
+      </div>
+      <noscript><p>お問い合わせフォームのご利用には JavaScript を有効にしてください。</p></noscript>
+    </div>
+    <script src="./init.js" type="module"></script>
+  </body>
+</html>

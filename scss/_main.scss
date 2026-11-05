@@ -5,19 +5,50 @@
 @use "variables" as *;
 
 .main {
-  &__container {
-    @include container("md");
+  width: min(100%, 768px);
+  min-height: calc(100vh - 18rem);
+  margin: 0 auto;
+  padding: 0 clamp(0.75rem, 2%, 1.5rem);
+
+  &__title {
+    &::after {
+      content: "✶";
+      margin-inline-start: space("x-small");
+      color: theme-color("secondary");
+      font-size: 1.25em;
+    }
+
+    & > span {
+      font-family: "Cormorant Garamond", serif;
+    }
   }
 
-  &__row {
-    @include row(flex-start, flex-start);
+  &__list {
+    margin: space("medium") 0;
+    padding: 0;
+    list-style-type: none;
   }
 
-  &__article {
-    @include col(6, false, "md");
-  }
+  &__listItem {
+    &::before {
+      content: "✶";
+      padding-inline-end: 0.5em;
+      color: color-active("primary");
+      font-size: 1.5em;
+    }
 
-  &__aside {
-    @include col(3, false, "md");
+    &.is-spec {
+      color: theme-color("dark");
+      font-size: 0.875rem;
+      letter-spacing: var(--heading-letter-spacing);
+
+      &::before {
+        content: "―";
+        margin-inline-end: space("x-small");
+        padding-inline-end: 0.5em;
+        color: theme-color("secondary");
+        font-weight: 700;
+      }
+    }
   }
 }

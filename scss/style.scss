@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 /**
- * Style.css
+ * style.css
  * © 2026 QWEL.DESIGN (https://qwel.design)
  * Released under the MIT License.
  * See LICENSE file for details.
@@ -13,37 +13,17 @@
 @use "root";
 @use "normalize";
 
-// Layout
+// Projects
 @use "header";
-@use "gNav";
+@use "breadcrumb";
 @use "main";
 @use "footer";
-
-// Components
 @use "icon";
-@use "button";
-@use "embed";
-@use "breadcrumb";
-@use "pagination";
-@use "backToTop";
-@use "drawerMenu";
-@use "fader";
-@use "modal";
-@use "slider";
-
-// Projects
-@use "hero";
-@use "section";
-@use "postItem";
-@use "postList";
 @use "form";
 
 // Utility
-@use "utilities/scroll-offset";
-@use "utilities/scroll-inview";
-@use "utilities/safe-embed";
 //@use "utilities/flex";
 //@use "utilities/flex-item";
-@use "utilities/spacing";
-@use "utilities/text";
-@use "utilities/visibility";
+//@use "utilities/spacing";
+//@use "utilities/text";
+//@use "utilities/visibility";

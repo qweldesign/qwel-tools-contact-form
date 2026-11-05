@@ -2,51 +2,12 @@
  * Layout - Header
  */
 
-@use "variables" as *;
-
 .header {
-  position: fixed;
-  z-index: 1000;
-  width: 100%;
-  height: $header-height;
-  transition: background-color 0.35s ease;
+  width: min(100%, 768px);
+  margin: 0 auto;
+  padding: 0 clamp(0.75rem, 2%, 1.5rem);
 
-  // サイトタイトルがテキストの場合 (ロゴ未使用の場合)
-  // モバイル時は header 背景透過
-  // 白文字にテキストシャドウを入れる
-  @media (max-width: breakpoint("md") - 0.1) {
-    .gNav__siteBrand a {
-      color: theme-color("lightest");
-      text-shadow: 0 0 6px #000;
-
-      &:hover {
-        color: theme-color("lightest");
-      }
-    }
-  }
-
-  // タブレット・デスクトップ時は header 背景を白 (gNav の視認性)
-  // マウスオーバー時, およびファーストビューのスクロール時の設定
-  @media (min-width: breakpoint("md")) {
-    &:hover, &:not(.is-active) {
-      background-color: $body-bg;
-
-      a, .gNav__siteBrand a {
-        color: $link-color;
-
-        &:hover {
-          color: $link-hover-color;
-        }
-      }
-    }
-  }
-
-  a {
-    color: $body-bg;
-  }
-
-  &__container {
-    @include container();
-    height: 100%;
+  &__logo {
+    width: 7.2rem;
   }
 }
