@@ -28,7 +28,7 @@ $img-aspect-ratio: math.div(8, 5) !default;
 //
 // lg: 1〜4カラム (12グリッド: 72rem)
 // 幅広コンテナ使用時に4カラムレイアウトが可能
-// "md"から flexItem を伸長させる使い方でもOK
+// "md"から flex-item を伸長させる使い方でもOK
 
 // ブレイクポイント (BP)
 $breakpoints:      (
